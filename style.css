@@ -1,0 +1,30 @@
+*{
+	margin: 0;
+}
+
+body{
+	background: linear-gradient(90deg, rgb(135, 135, 220), rgb(101, 182, 182));
+	height: 100vh;
+	user-select: none;
+}
+
+.tetris{
+	display: grid;
+	grid-template-columns: repeat(10, auto);
+	grid-template-rows: repeat(20, auto) ;
+	background-color: blue;
+	padding: 0.5hv;
+	border-radius: 0.5vh;
+}
+
+.tetris div {
+	width: min(4vh, 7vw);
+	height: min(4vh, 7vw);
+	background-color: rgb(191, 89, 89);
+	border-radius: 0.3hv;
+	/* box-shadow: ; */
+}
+
+.tetris .O {
+	background-color: rgb(124, 93, 154);
+}
