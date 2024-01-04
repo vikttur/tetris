@@ -1,12 +1,43 @@
 const PLAYFIELD_COLUMNS = 10;
 const PLAYFIELD_ROWS = 20;
 
-const TETROMINO_NAMES = ['O'];
+const TETROMINO_NAMES = ['O', 'T', 'L', 'Lr', 'S', 'Sr', 'I'];
 
 const TETROMINOES = {
 	'O': [
 		[1, 1],
 		[1, 1]
+	],
+	'T': [
+		[1, 1, 1],
+		[0, 1, 0],
+		[0, 0, 0]
+	],
+	'L': [
+		[0, 1, 0],
+		[0, 1, 0],
+		[0, 1, 1]
+	],
+	'Lr': [
+		[0, 1, 0],
+		[0, 1, 0],
+		[1, 1, 0]
+	],
+	'S': [
+		[0, 1, 1],
+		[1, 1, 0],
+		[0, 0, 0]
+	],
+	'Sr': [
+		[1, 1, 0],
+		[0, 1, 1],
+		[0, 0, 0]
+	],
+	'I': [
+		[0, 0, 0, 0],
+		[1, 1, 1, 1],
+		[0, 0, 0, 0],
+		[0, 0, 0, 0]
 	],
 };
 
@@ -87,12 +118,31 @@ function onKeyDown(e) {
 
 function moveTetrominoDown(){
 	tetromino.row += 1;
+	if(isOutsideGameBoard()){
+		tetromino.row -= 1;
+	}
 }
 
 function moveTetrominoLeft(){
 	tetromino.column -= 1;
+	if(isOutsideGameBoard()) tetromino.column += 1;
 }
 
 function moveTetrominoRight(){
 	tetromino.column += 1;
+	if(isOutsideGameBoard()) tetromino.column -= 1;
+}
+
+function isOutsideGameBoard(){
+	const matrixSize = tetromino.matrix.length;
+
+	for(let row = 0; row < matrixSize; row++){
+		for(let column = 0; column < matrixSize; column++){
+			if(tetromino.column + column < 0 ||
+				tetromino.column + column >= PLAYFIELD_COLUMNS ||
+				tetromino.row + row >= playField.length) return true;
+		}
+	}
+
+	return false;
 }
