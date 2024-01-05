@@ -12,7 +12,13 @@ body{
 	user-select: none;
 }
 
-.tetris{
+ul {
+	padding: 0;
+	margin: 0;
+	list-style: none;
+}
+
+.field{
 	display: grid;
 	grid-template-columns: repeat(10, auto);
 	grid-template-rows: repeat(20, auto) ;
@@ -21,7 +27,7 @@ body{
 	border-radius: 0.5vh;
 }
 
-.tetris div {
+.field li {
 	width: min(4vh, 7vw);
 	height: min(4vh, 7vw);
 	background-color: rgb(136, 136, 237);
@@ -30,6 +36,10 @@ body{
 				/* inset -2px -2px -2px rgb(91, 80, 80,0.5); */
 }
 
-.tetris .O {
+.field .O {
 	background-color: rgb(197, 219, 135);
+}
+
+.field .L {
+	background-color: rgb(219, 166, 135);
 }
