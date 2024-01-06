@@ -28,10 +28,10 @@ ul {
 }
 
 .field li {
-	width: min(4vh, 7vw);
-	height: min(4vh, 7vw);
+	width: 26px;
+	height: 26px;
 	background-color: rgb(136, 136, 237);
-	border-radius: 0.3hv;
+	border-radius: 1px;
 	box-shadow: inset 2px 2px 2px rgb(75, 73, 73);
 				/* inset -2px -2px -2px rgb(91, 80, 80,0.5); */
 }

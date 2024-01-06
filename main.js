@@ -4,38 +4,38 @@ const PLAYFIELD_ROWS = 20;
 const FIGURES = {
 	'O': [
 		[1, 1],
-		[1, 1]
+		[1, 1],
 	],
 	'T': [
 		[1, 1, 1],
 		[0, 1, 0],
-		[0, 0, 0]
+		[0, 0, 0],
 	],
 	'L': [
 		[0, 1, 0],
 		[0, 1, 0],
-		[0, 1, 1]
+		[0, 0, 0],
 	],
 	'Lr': [
-		[0, 1, 0],
-		[0, 1, 0],
-		[1, 1, 0]
+		[0, 0, 0],
+		[1, 1, 1],
+		[0, 0, 1],
 	],
 	'S': [
 		[0, 1, 1],
 		[1, 1, 0],
-		[0, 0, 0]
+		[0, 0, 0],
 	],
 	'Sr': [
 		[1, 1, 0],
 		[0, 1, 1],
-		[0, 0, 0]
+		[0, 0, 0],
 	],
 	'I': [
 		[0, 0, 0, 0],
+		[1, 1, 1, 1],
 		[0, 0, 0, 0],
 		[0, 0, 0, 0],
-		[1, 1, 1, 1]
 	],
 };
 
@@ -71,12 +71,12 @@ function createElementsArray(){
 }
 
 function generateFigure(){
-	const name = 'O';
+	const name = 'L';
 	const matrix = FIGURES[name];
 	const length =  matrix.length;
 
-	const column = 4;
-	const row = 2;
+	const column = Number.parseInt((PLAYFIELD_COLUMNS - length) / 2);
+	const row = 0;
 
 	figure= {
 		name,
@@ -102,10 +102,11 @@ const cells = document.querySelectorAll('.field li');
 // }
 
 function drawFigure(){
-	const { name, length, row, column } = figure;
+	const { name, matrix, length, row, column } = figure;
 
 	for(let i = 0; i < length; i += 1){
 		for(let j = 0; j < length; j += 1){
+			if(!matrix[i][j]) continue;
 			const cellIndex = indexElement(row + i, column + j);
 			cells[cellIndex].classList.add(name);
 		}
@@ -156,9 +157,9 @@ function onKeyDown(e) {
 	if (isThereMove) redrawingFigure(); //draw();
 }
 
-function moveFigureDown(){
+function moveFigureDown(){	
 	if (figure.row + figure.length >= PLAYFIELD_ROWS) {
-		fixsingFigure();
+		// fixsingFigure();
 		generateFigure();
 		return;
 	}
@@ -169,7 +170,14 @@ function moveFigureDown(){
 }
 
 function moveFigureLeft(){
-	if (figure.column <= 0) return isThereMove = false;
+	const columnToCheck = 0 - figure.column;
+console.log(columnToCheck);
+	if (figure.column <= 0) {
+		if(isNoEmpty(columnToCheck)) {
+			isThereMove = false;
+			return;
+		}
+	}
 
 	isThereMove = true;
 	deleteFigure();
@@ -177,19 +185,39 @@ function moveFigureLeft(){
 }
 
 function moveFigureRight(){
-	if (figure.column + figure.length >= PLAYFIELD_COLUMNS) return isThereMove = false;
+	const columnToCheck = figure.column + figure.length;
+	console.log(columnToCheck);
+	if (figure.column + figure.length >= PLAYFIELD_COLUMNS) {
+		if(isNoEmpty(columnToCheck)) {
+			isThereMove = false;
+			return;
+		}
+	}
 
 	isThereMove = true;
 	deleteFigure();
 	figure.column += 1;
 }
 
-function fixsingFigure(){
-	const { length, row, column } = figure;
+function isNoEmpty(columnToCheck){
+	return true;
+// 	const { length, column, row } = figure;
+// console.log(column);
 
-	for(let i = 0; i < length; i += 1){
-		for(let j = 0; j < length; j += 1){
-			playField[row + i][column + j] = figureNames[0];
-		}
-	}
+// 	for(let i = 0; i < length; i += 1){
+// 		const cellIndex = indexElement(row + i, columnToCheck);
+
+// 		if(!cells[cellIndex]) continue;
+// 		return true;
+// 	}
 }
+
+// function fixsingFigure(){
+	// const { length, row, column } = figure;
+
+	// for(let i = 0; i < length; i += 1){
+	// 	for(let j = 0; j < length; j += 1){
+	// 		playField[row + i][column + j] = figureNames[0];
+	// 	}
+	// }
+// }
