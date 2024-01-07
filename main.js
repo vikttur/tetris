@@ -13,7 +13,7 @@ const FIGURES = {
 	],
 	'L': [
 		[0, 1, 0],
-		[0, 1, 0],
+		[0, 1, 1],
 		[0, 0, 0],
 	],
 	'Lr': [
@@ -159,57 +159,72 @@ function onKeyDown(e) {
 
 function moveFigureDown(){	
 	if (figure.row + figure.length >= PLAYFIELD_ROWS) {
-		// fixsingFigure();
-		generateFigure();
-		return;
-	}
+		const rowToCheck = PLAYFIELD_ROWS - figure.row - 1;
 
-	isThereMove = true;
-	deleteFigure();
-	figure.row += 1;
+		if(isNotEmptyRow(rowToCheck)) {
+			// fixsingFigure();
+			generateFigure();
+			return;
+		}
+	}
+	
+	permissionToMoveFigure('row', 1);
 }
 
 function moveFigureLeft(){
-	const columnToCheck = 0 - figure.column;
-console.log(columnToCheck);
 	if (figure.column <= 0) {
-		if(isNoEmpty(columnToCheck)) {
+		const columnToCheck = 0 - figure.column;
+
+		if(isNotEmptyColumn(columnToCheck)) {
 			isThereMove = false;
 			return;
 		}
 	}
 
-	isThereMove = true;
-	deleteFigure();
-	figure.column -= 1;
+	permissionToMoveFigure('column', -1);
 }
 
 function moveFigureRight(){
-	const columnToCheck = figure.column + figure.length;
-	console.log(columnToCheck);
 	if (figure.column + figure.length >= PLAYFIELD_COLUMNS) {
-		if(isNoEmpty(columnToCheck)) {
+		const columnToCheck = PLAYFIELD_COLUMNS - figure.column - 1;
+
+		if(isNotEmptyColumn(columnToCheck)) {
 			isThereMove = false;
 			return;
 		}
 	}
 
-	isThereMove = true;
-	deleteFigure();
-	figure.column += 1;
+	permissionToMoveFigure('column', 1);
 }
 
-function isNoEmpty(columnToCheck){
-	return true;
-// 	const { length, column, row } = figure;
-// console.log(column);
+function isNotEmptyColumn(columnToCheck){
+	const { matrix, length } = figure;
 
-// 	for(let i = 0; i < length; i += 1){
-// 		const cellIndex = indexElement(row + i, columnToCheck);
+	for(let i = 0; i < length; i += 1){
+		if(!matrix[i][columnToCheck]) continue;
+		return true;
+	}
+}
 
-// 		if(!cells[cellIndex]) continue;
-// 		return true;
-// 	}
+function isNotEmptyRow(rowToCheck){
+	const { matrix, length } = figure;
+
+	for(let j = 0; j < length; j += 1){
+		if(!matrix[rowToCheck][j]) continue;
+		return true;
+	}
+}
+
+function permissionToMoveFigure(directionOfMove, displacementValue) {
+	isThereMove = true;
+	deleteFigure();
+
+	if(directionOfMove === 'row') {
+		figure.row += displacementValue;
+		return;
+	}
+
+	figure.column += displacementValue;
 }
 
 // function fixsingFigure(){
