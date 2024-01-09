@@ -62,8 +62,12 @@ function createElementsArray(){
 		.map(() => new Array(PLAYFIELD_COLUMNS).fill(0));
 }
 
-function generateFigure(){
-	const name = 'I';
+function randomValue (max){
+	return Math.floor(Math.random() * max);
+}
+
+function generateFigure(){   
+	const name = figureNames[randomValue(figureNames.length)];
 	const matrix = FIGURES[name];
 	const height = matrix.length;
 	const width =  matrix[0].length;
@@ -133,6 +137,7 @@ drawFigure();
 // 	// redrawingFigure();
 // }
 
+// ------------------------------------
 document.addEventListener('keydown', onPressKay);
 
 function onPressKay(e) {
@@ -152,7 +157,7 @@ function onPressKay(e) {
 }
 
 function moveFigureDown(){	
-	if (figure.row + figure.height>= PLAYFIELD_ROWS) {
+	if (figure.row + figure.height === PLAYFIELD_ROWS || isOverlayingFigures()) {
 		// fixsingFigure();
 		generateFigure();
 		return;
@@ -162,18 +167,28 @@ function moveFigureDown(){
 	permissionToMoveFigure('row', 1);
 }
 
+// function fixsingFigure(){
+	// const { length, row, column } = figure;
+
+	// for(let i = 0; i < length; i += 1){
+	// 	for(let j = 0; j < length; j += 1){
+	// 		playField[row + i][column + j] = figureNames[0];
+	// 	}
+	// }
+// }
+
 function moveFigureLeft(){
-	if (figure.column <= 0) {
+	if(figure.column === 0) {
 		isThereMove = false;
 		return;
 	}
-	
+
 	isThereMove = true;
 	permissionToMoveFigure('column', -1);
 }
 
 function moveFigureRight(){
-	if (figure.column + figure.width >= PLAYFIELD_COLUMNS) {
+	if (figure.column + figure.width === PLAYFIELD_COLUMNS) {
 		isThereMove = false;
 		return;
 	}
@@ -192,12 +207,14 @@ function permissionToMoveFigure(directionOfMove, displacementValue) {
 	figure.column += displacementValue;
 }
 
-// function fixsingFigure(){
-	// const { length, row, column } = figure;
+function isOverlayingFigures(){
+	const { matrix, width, height, row, column } = figure;
+		for(let j = 0; j < width; j += 1){
+			if(!matrix[height - 1][j]) continue;
+			
+			const cellIndex = indexElement(row + height, column + j);
+			if(cells[cellIndex].hasAttribute('class')) return true;
+		}
 
-	// for(let i = 0; i < length; i += 1){
-	// 	for(let j = 0; j < length; j += 1){
-	// 		playField[row + i][column + j] = figureNames[0];
-	// 	}
-	// }
-// }
+	return false;
+}

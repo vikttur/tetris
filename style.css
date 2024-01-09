@@ -40,10 +40,26 @@ ul {
 	background-color: rgb(197, 219, 135);
 }
 
-.field .L {
+.field .T {
 	background-color: rgb(219, 166, 135);
 }
 
-.field .I {
+.field .L {
 	background-color: rgb(18, 135, 135);
+}
+
+.field .Lr {
+	background-color: rgb(151, 34, 34);
+}
+
+.field .S {
+	background-color: rgb(135, 18, 96);
+}
+
+.field .Sr {
+	background-color: rgb(191, 204, 204);
+}
+
+.field .I {
+	background-color: rgb(212, 218, 90);
 }
