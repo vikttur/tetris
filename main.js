@@ -100,7 +100,7 @@ const cells = document.querySelectorAll('.field li');
 // }
 
 function deletingDateAttributes(){
-	const { name, matrix, width, height, row, column } = figure;
+	const { width, height, row, column } = figure;
 
 	for(let i = 0; i < height; i += 1){
 		for(let j = 0; j < width; j += 1){
@@ -194,10 +194,12 @@ function moveFigureDown(){
 function moveFigureLeft(){
 	const { column } = figure;
 
-	if(column === 0 || isOverlayingFiguresToside(column, -1)) {
+	if(column === 0) {
 		isThereMove = false;
 		return;
 	}
+
+	if(isOverlayingFiguresToside(-1)) return;
 
 	isThereMove = true;
 	permissionToMoveFigure('column', -1);
@@ -206,10 +208,13 @@ function moveFigureLeft(){
 function moveFigureRight(){
 	const { column, width } = figure;
 
-	if (column + width === PLAYFIELD_COLUMNS || isOverlayingFiguresToside(column + width, 1)) {
+	if (column + width === PLAYFIELD_COLUMNS) {
 		isThereMove = false;
 		return;
 	}
+	
+	if(isOverlayingFiguresToside(1)) return;
+
 	isThereMove = true;
 	permissionToMoveFigure('column', 1);
 }
@@ -231,32 +236,29 @@ function isOverlayingFiguresDown(){
 	for(let i = 0; i < height; i += 1){
 		for(let j = 0; j < width; j += 1){
 			if(!matrix[i][j]) continue;
-console.log(i + "_" + j);
+
 			const cellIndex = indexElement(row + i + 1, column + j);
 			if(cells[cellIndex].hasAttribute('data-figure')) continue;
-			console.log(cellIndex);
-			console.log(cells[cellIndex].hasAttribute('class'));
-			
 			if(cells[cellIndex].hasAttribute('class')) return true;
 		}
 	}
 
-	console.log('555___555');
 	return false;	
 }
 
-function isOverlayingFiguresToside(columnToCheck, offset){
-	const { matrix, height, width, row } = figure;
+function isOverlayingFiguresToside(offset){
+	const { matrix, height, width, row, column } = figure;
 	
 	for(let i = 0; i < height; i += 1){
 		for(let j = 0; j < width; j += 1){
-			if(!matrix[i][columnToCheck]) continue;
+			if(!matrix[i][j]) continue;
 			
-			const cellIndex = indexElement(row + i, columnToCheck + offset);
+			const cellIndex = indexElement(row + i, column + j + offset);
+			if(cells[cellIndex].hasAttribute('data-figure')) continue;
 			if(cells[cellIndex].hasAttribute('class')) return true;
 		}
 	}
-
+	
 	return false;
 }
 
