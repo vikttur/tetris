@@ -99,6 +99,17 @@ const cells = document.querySelectorAll('.field li');
 // 	}
 // }
 
+function deletingDateAttributes(){
+	const { name, matrix, width, height, row, column } = figure;
+
+	for(let i = 0; i < height; i += 1){
+		for(let j = 0; j < width; j += 1){
+			const cellIndex = indexElement(row + i, column + j);
+			cells[cellIndex].removeAttribute('data-figure');
+		}
+	}
+}
+
 function drawFigure(){
 	const { name, matrix, width, height, row, column } = figure;
 
@@ -107,6 +118,7 @@ function drawFigure(){
 			if(!matrix[i][j]) continue;
 			const cellIndex = indexElement(row + i, column + j);
 			cells[cellIndex].classList.add(name);
+			cells[cellIndex].setAttribute('data-figure', 'new');
 		}
 	}
 }
@@ -123,6 +135,7 @@ function deleteFigure(){
 		for(let j = 0; j < width; j += 1){
 			const cellIndex = indexElement(row + i, column + j);
 			cells[cellIndex].removeAttribute('class');
+			cells[cellIndex].removeAttribute('data-figure');
 		}
 	}
 }
@@ -157,8 +170,9 @@ function onPressKay(e) {
 }
 
 function moveFigureDown(){	
-	if (figure.row + figure.height === PLAYFIELD_ROWS || isOverlayingFigures()) {
+	if (figure.row + figure.height === PLAYFIELD_ROWS || isOverlayingFiguresDown()) {
 		// fixsingFigure();
+		deletingDateAttributes();
 		generateFigure();
 		return;
 	}
@@ -178,7 +192,9 @@ function moveFigureDown(){
 // }
 
 function moveFigureLeft(){
-	if(figure.column === 0) {
+	const { column } = figure;
+
+	if(column === 0 || isOverlayingFiguresToside(column, -1)) {
 		isThereMove = false;
 		return;
 	}
@@ -188,7 +204,9 @@ function moveFigureLeft(){
 }
 
 function moveFigureRight(){
-	if (figure.column + figure.width === PLAYFIELD_COLUMNS) {
+	const { column, width } = figure;
+
+	if (column + width === PLAYFIELD_COLUMNS || isOverlayingFiguresToside(column + width, 1)) {
 		isThereMove = false;
 		return;
 	}
@@ -207,14 +225,41 @@ function permissionToMoveFigure(directionOfMove, displacementValue) {
 	figure.column += displacementValue;
 }
 
-function isOverlayingFigures(){
+function isOverlayingFiguresDown(){
 	const { matrix, width, height, row, column } = figure;
+	
+	for(let i = 0; i < height; i += 1){
 		for(let j = 0; j < width; j += 1){
-			if(!matrix[height - 1][j]) continue;
+			if(!matrix[i][j]) continue;
+console.log(i + "_" + j);
+			const cellIndex = indexElement(row + i + 1, column + j);
+			if(cells[cellIndex].hasAttribute('data-figure')) continue;
+			console.log(cellIndex);
+			console.log(cells[cellIndex].hasAttribute('class'));
 			
-			const cellIndex = indexElement(row + height, column + j);
 			if(cells[cellIndex].hasAttribute('class')) return true;
 		}
+	}
+
+	console.log('555___555');
+	return false;	
+}
+
+function isOverlayingFiguresToside(columnToCheck, offset){
+	const { matrix, height, width, row } = figure;
+	
+	for(let i = 0; i < height; i += 1){
+		for(let j = 0; j < width; j += 1){
+			if(!matrix[i][columnToCheck]) continue;
+			
+			const cellIndex = indexElement(row + i, columnToCheck + offset);
+			if(cells[cellIndex].hasAttribute('class')) return true;
+		}
+	}
 
 	return false;
+}
+
+function rotateFigure(){
+
 }
