@@ -164,6 +164,13 @@ function onPressKay(e) {
 		case 'ArrowRight':
 			moveFigureRight();
 			break;
+		case 'ArrowUp':
+			rotateFigureRight();
+			break;	
+		case 'Z':
+			console.log(555);
+			rotateFigureLeft();
+			break;
 	}
 
 	if (isThereMove) redrawingFigure(); //draw();
@@ -229,7 +236,7 @@ function permissionToMoveFigure(directionOfMove, displacementValue) {
 
 	figure.column += displacementValue;
 }
-
+ 
 function isOverlayingFiguresDown(){
 	const { matrix, width, height, row, column } = figure;
 	
@@ -258,10 +265,21 @@ function isOverlayingFiguresToside(offset){
 			if(cells[cellIndex].hasAttribute('class')) return true;
 		}
 	}
-	
+
 	return false;
 }
 
-function rotateFigure(){
+function isLineFull(){
+	const { height, width, row, column } = figure;
+	const arrayRows = [];
+	let numberOfFilled  = 0;
 
+	for(let i = row + height; i = row; i -= 1){
+		for(let j = 0; j < width; j += 1){
+			const cellIndex = indexElement(row + i, column + j);
+			if(cells[cellIndex].hasAttribute('class')) numberOfFilled += 1;
+		}
+
+		if(numberOfFilled = PLAYFIELD_COLUMNS) arrayRows.push(i);
+	}
 }
