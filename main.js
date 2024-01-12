@@ -284,10 +284,9 @@ function searchForFilledRows(){
 
 		for(let j = 0; j < PLAYFIELD_COLUMNS; j += 1){
 			const cellIndex = indexElement(i, j);
-// console.log(cellIndex);		
 			if(cells[cellIndex].hasAttribute('class')) quantityOfFilledRows += 1;
 		}
-// console.log(i);
+
 		if(quantityOfFilledRows === PLAYFIELD_COLUMNS) arrayOfFilledRows.push(i);
 	}
 
@@ -309,4 +308,47 @@ function removingFilledRows(array){
 	}
 }
 
+// ------------------------------------
+function rotateFigureLeft(){
+	// for(let i = 0; i < height; i += 1){
+	// 	for(let j = 0; j < width; j += 1){
+	// 		if(!matrix[i][j]) continue;
+			
+	// 		const cellIndex = indexElement(row + i, column + j + offset);
+	// 		if(cells[cellIndex].hasAttribute('data-figure')) continue;
+	// 		if(cells[cellIndex].hasAttribute('class')) return true;
+	// 	}
+	// }
+}
 
+function rotateFigureRight(){
+	const oldMatrix = figure.matrix;
+	const newMatrix = rotateMatrix(figure.matrix);
+	deleteFigure();
+	figure.matrix = newMatrix;
+	console.log(figure.matrix);
+	
+
+	// if(isValid()){
+	// 	figure.matrix = oldMatrix;
+	// }
+}
+
+function rotateMatrix(matrixFigure){
+	const { height, width } = figure;
+
+	const rotateMatrix = [];	
+	rotateMatrix.length = width;
+	
+	for(let j = 0; j < width; j +=1){	
+		rotateMatrix[j] = [];
+
+		for(let i = 0; i < height; i +=1){
+			rotateMatrix[j][i] = matrixFigure[height - i - 1][j];
+		}
+	}
+
+	return rotateMatrix;
+}
+
+// ------------------------------------
