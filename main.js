@@ -180,6 +180,7 @@ function moveFigureDown(){
 	if (figure.row + figure.height === PLAYFIELD_ROWS || isOverlayingFiguresDown()) {
 		// fixsingFigure();
 		deletingDateAttributes();
+		WorkWithFilledRows();
 		generateFigure();
 		return;
 	}
@@ -268,18 +269,44 @@ function isOverlayingFiguresToside(offset){
 
 	return false;
 }
+// -----------------------------------------
+function WorkWithFilledRows(){
+	const arrayOfFilledRows  = searchForFilledRows();
+	if(arrayOfFilledRows.length) removingFilledRows(arrayOfFilledRows);
+}
 
-function isLineFull(){
-	const { height, width, row, column } = figure;
-	const arrayRows = [];
-	let numberOfFilled  = 0;
+function searchForFilledRows(){
+	const { height, row } = figure;
+	const arrayOfFilledRows = [];
 
-	for(let i = row + height; i = row; i -= 1){
-		for(let j = 0; j < width; j += 1){
-			const cellIndex = indexElement(row + i, column + j);
-			if(cells[cellIndex].hasAttribute('class')) numberOfFilled += 1;
+	for(let i = row; i < row + height; i += 1){
+		let quantityOfFilledRows  = 0;
+
+		for(let j = 0; j < PLAYFIELD_COLUMNS; j += 1){
+			const cellIndex = indexElement(i, j);
+// console.log(cellIndex);		
+			if(cells[cellIndex].hasAttribute('class')) quantityOfFilledRows += 1;
 		}
+// console.log(i);
+		if(quantityOfFilledRows === PLAYFIELD_COLUMNS) arrayOfFilledRows.push(i);
+	}
 
-		if(numberOfFilled = PLAYFIELD_COLUMNS) arrayRows.push(i);
+	return arrayOfFilledRows;
+}
+
+function removingFilledRows(array){
+	for(let n = 0; n < array.length; n += 1){
+		const lastRow = array;
+
+		for(let i = lastRow; i > 0; i -= 1){
+			for(let j = 0; j < PLAYFIELD_COLUMNS; j += 1){
+				const cellIndexUp = indexElement(i - 1, j); // як бути з першим рядком?
+				const cellIndexDown = indexElement(i, j);
+
+				cells[cellIndexDown].classList = cells[cellIndexUp].classList;
+			}
+		}
 	}
 }
+
+
