@@ -39,35 +39,34 @@ const FIGURES = {
 	],
 };
 
+
 const figureNames = Object.keys(FIGURES);
 
-let playField = [];
 let figure = {};
 let isThereMove = true;
 
-function indexElement(row, column) {
-	return row * PLAYFIELD_COLUMNS + column;
-}
-
-function generatePlayField () {
-	createFieldElements();
-	createElementsArray();
-}
-
-function createFieldElements(){
+// s-generatePlayField------------------------------
+function generatePlayField(){
 	const field = document.createElement('ul');
 	field.classList.add('field');
+	
+	createFieldElements(field);
+	addPlayFieldInDOM(field);
+}
 
+function createFieldElements(field){
 	for(let i = 0; i < PLAYFIELD_ROWS * PLAYFIELD_COLUMNS; i += 1) {
 		field.append(document.createElement('li'));
-		document.querySelector('.tetris').append(field);
 	}
 }
 
-function createElementsArray(){
-	playField = new Array(PLAYFIELD_ROWS)
-		.fill()
-		.map(() => new Array(PLAYFIELD_COLUMNS).fill(0));
+function addPlayFieldInDOM(field){
+	document.querySelector('.tetris').append(field);
+};
+// f-generatePlayField------------------------------
+
+function elementIndex(row, column) {
+	return row * PLAYFIELD_COLUMNS + column;
 }
 
 function randomValue (max){
@@ -100,22 +99,13 @@ generatePlayField();
 
 const cells = document.querySelectorAll('.field li');
 
-// function drawPlayField(){
-// 	for(let i = 0; i < PLAYFIELD_ROWS; i += 1){
-// 		for(let j = 0; j < PLAYFIELD_COLUMNS; j += 1){
-// 			const name = playField[i][j];
-// 			const cellIndex = indexElement(i, j);
-// 			cells[cellIndex].classList.add(name);
-// 		}
-// 	}
-// }
 
 function deletingDateAttributes(){
 	const { width, height, row, column } = figure;
 
 	for(let i = 0; i < height; i += 1){
 		for(let j = 0; j < width; j += 1){
-			const cellIndex = indexElement(row + i, column + j);
+			const cellIndex = elementIndex(row + i, column + j);
 			cells[cellIndex].removeAttribute('data-figure');
 		}
 	}
@@ -123,15 +113,13 @@ function deletingDateAttributes(){
 
 function drawFigure(){
 	const { name, matrix, width, height, row, column } = figure;
-// console.log(matrix);
-// console.log(width);
-// console.log(height);
+
 	for(let i = 0; i < height; i += 1){
 		if(i + row < 0) continue;
 
 		for(let j = 0; j < width; j += 1){
 			if(!matrix[i][j]) continue;
-			const cellIndex = indexElement(row + i, column + j);
+			const cellIndex = elementIndex(row + i, column + j);
 			cells[cellIndex].classList.add(name);
 			cells[cellIndex].setAttribute('data-figure', 'new');
 		}
@@ -150,7 +138,7 @@ function deleteFigure(){
 		if(i + row < 0) continue;
 
 		for(let j = 0; j < width; j += 1){
-			const cellIndex = indexElement(row + i, column + j);
+			const cellIndex = elementIndex(row + i, column + j);
 			cells[cellIndex].removeAttribute('class');
 			cells[cellIndex].removeAttribute('data-figure');
 		}
@@ -264,7 +252,7 @@ function isOverlayingFiguresDown(){
 		for(let j = 0; j < width; j += 1){
 			if(!matrix[i][j]) continue;
 
-			const cellIndex = indexElement(row + i + 1, column + j);
+			const cellIndex = elementIndex(row + i + 1, column + j);
 			if(cells[cellIndex].hasAttribute('data-figure')) continue;
 			if(cells[cellIndex].hasAttribute('class')) return true;
 		}
@@ -282,7 +270,7 @@ function isOverlayingFiguresToside(offset){
 		for(let j = 0; j < width; j += 1){
 			if(!matrix[i][j]) continue;
 			
-			const cellIndex = indexElement(row + i, column + j + offset);
+			const cellIndex = elementIndex(row + i, column + j + offset);
 			if(cells[cellIndex].hasAttribute('data-figure')) continue;
 			if(cells[cellIndex].hasAttribute('class')) return true;
 		}
@@ -304,7 +292,7 @@ function searchForFilledRows(){
 		let quantityOfFilledRows  = 0;
 
 		for(let j = 0; j < PLAYFIELD_COLUMNS; j += 1){
-			const cellIndex = indexElement(i, j);
+			const cellIndex = elementIndex(i, j);
 			if(cells[cellIndex].hasAttribute('class')) quantityOfFilledRows += 1;
 		}
 
@@ -320,8 +308,8 @@ function removingFilledRows(array){
 
 		for(let i = lastRow; i > 0; i -= 1){
 			for(let j = 0; j < PLAYFIELD_COLUMNS; j += 1){
-				const cellIndexUp = indexElement(i - 1, j); // як бути з першим рядком?
-				const cellIndexDown = indexElement(i, j);
+				const cellIndexUp = elementIndex(i - 1, j); // як бути з першим рядком?
+				const cellIndexDown = elementIndex(i, j);
 
 				cells[cellIndexDown].classList = cells[cellIndexUp].classList;
 			}
@@ -335,7 +323,7 @@ function rotateFigureLeft(){
 	// 	for(let j = 0; j < width; j += 1){
 	// 		if(!matrix[i][j]) continue;
 			
-	// 		const cellIndex = indexElement(row + i, column + j + offset);
+	// 		const cellIndex = elementIndex(row + i, column + j + offset);
 	// 		if(cells[cellIndex].hasAttribute('data-figure')) continue;
 	// 		if(cells[cellIndex].hasAttribute('class')) return true;
 	// 	}
@@ -364,8 +352,6 @@ function rotateFigureRight(){
 		newFigureRow();
 		newFigureColumn();
 	}
-
-	console.log(figure.rotate);
 
 
 	// if(isValid()){
