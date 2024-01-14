@@ -71,17 +71,20 @@ function generateFigure(){
 	const matrix = FIGURES[name];
 	const height = matrix.length;
 	const width =  matrix[0].length;
-
-	const row = 0;
+	const row = 1 - height;
 	const column = Number.parseInt((PLAYFIELD_COLUMNS - width) / 2);
+	const rotate = 0;
+	const typeRotate = (width === 3 ? 1 : 2);
 	
-	figure= {
+	figure = {
 		name,
 		matrix,
 		height,
 		width,
 		row,
 		column,
+		rotate,
+		typeRotate,
 	}
 }
 
@@ -112,8 +115,12 @@ function deletingDateAttributes(){
 
 function drawFigure(){
 	const { name, matrix, width, height, row, column } = figure;
-
+// console.log(matrix);
+// console.log(width);
+// console.log(height);
 	for(let i = 0; i < height; i += 1){
+		if(i + row < 0) continue;
+
 		for(let j = 0; j < width; j += 1){
 			if(!matrix[i][j]) continue;
 			const cellIndex = indexElement(row + i, column + j);
@@ -132,6 +139,8 @@ function deleteFigure(){
 	const { height, width, row, column } = figure;
 
 	for(let i = 0; i < height; i += 1){
+		if(i + row < 0) continue;
+
 		for(let j = 0; j < width; j += 1){
 			const cellIndex = indexElement(row + i, column + j);
 			cells[cellIndex].removeAttribute('class');
@@ -242,6 +251,8 @@ function isOverlayingFiguresDown(){
 	const { matrix, width, height, row, column } = figure;
 	
 	for(let i = 0; i < height; i += 1){
+		if(i + row < 0) continue;
+
 		for(let j = 0; j < width; j += 1){
 			if(!matrix[i][j]) continue;
 
@@ -258,6 +269,8 @@ function isOverlayingFiguresToside(offset){
 	const { matrix, height, width, row, column } = figure;
 	
 	for(let i = 0; i < height; i += 1){
+		if(i + row < 0) continue;
+
 		for(let j = 0; j < width; j += 1){
 			if(!matrix[i][j]) continue;
 			
@@ -322,16 +335,55 @@ function rotateFigureLeft(){
 }
 
 function rotateFigureRight(){
+	figure;
 	const oldMatrix = figure.matrix;
 	const newMatrix = rotateMatrix(figure.matrix);
-	deleteFigure();
+
 	figure.matrix = newMatrix;
-	console.log(figure.matrix);
+	deleteFigure();	
 	
+	const temp = figure.height;
+	figure.height = figure.width;
+	figure.width = temp;
+
+	if(figure.width !== figure.height){
+		if(figure.rotate < 3) {
+			figure.rotate += 1;
+		} else {
+			figure.rotate = 0;
+		}
+
+		newFigureRow();
+		newFigureColumn();
+	}
+
+	console.log(figure.rotate);
+
 
 	// if(isValid()){
 	// 	figure.matrix = oldMatrix;
 	// }
+}
+
+function newFigureRow(){
+	switch(figure.rotate){
+		case 0:
+			figure.row += 1;
+			break;
+		case 1:
+			figure.row -= 1;
+			break;
+		case 2:
+			figure.row += 1;
+			break;
+		case 3:
+			figure.row -= 1;
+			break;	
+	}
+}
+
+function newFigureColumn(){
+
 }
 
 function rotateMatrix(matrixFigure){
