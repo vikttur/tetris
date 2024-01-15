@@ -5,13 +5,25 @@ const figureNames = Object.keys(FIGURES);
 let figure = {};
 let isThereMove = true;
 
+function elementIndex(row, column) {
+	return row * PLAYFIELD_COLUMNS + column;
+}
+
+function randomValue (min, max){
+	return Math.floor(Math.random() * (max - min) + min);	
+}
+
 // s-generatePlayField------------------------------
 function generatePlayField(){
-	const field = document.createElement('ul');
-	field.classList.add('field');
-	
+	const field = createField();
 	createFieldElements(field);
 	addPlayFieldInDOM(field);
+}
+
+function createField(){
+	const field = document.createElement('ul');
+	field.classList.add('field');
+	return field;
 }
 
 function createFieldElements(field){
@@ -25,59 +37,29 @@ function addPlayFieldInDOM(field){
 };
 // f-generatePlayField------------------------------
 
-function elementIndex(row, column) {
-	return row * PLAYFIELD_COLUMNS + column;
-}
-
-function randomValue (max){
-	return Math.floor(Math.random() * max);
-}
-
 function generateFigure(){   
-	const name = figureNames[randomValue(figureNames.length)];
+	const name = figureNames[randomValue(0, figureNames.length)];
 	const matrix = FIGURES[name];
-	const height = matrix.length;
-	const width =  matrix[0].length;
-	const row = 1 - height;
-	const column = Number.parseInt((PLAYFIELD_COLUMNS - width) / 2);
-	const rotate = 0;
-	const typeRotate = (width === 3 ? 1 : 2);
+	const size = matrix.length;
+	const row = 1 - size;
+	const column = Math.floor((PLAYFIELD_COLUMNS - size) / 2);
 	
 	figure = {
 		name,
 		matrix,
-		height,
-		width,
+		size,
 		row,
 		column,
-		rotate,
-		typeRotate,
-	}
-}
-
-generatePlayField();
-
-const cells = document.querySelectorAll('.field li');
-
-
-function deletingDateAttributes(){
-	const { width, height, row, column } = figure;
-
-	for(let i = 0; i < height; i += 1){
-		for(let j = 0; j < width; j += 1){
-			const cellIndex = elementIndex(row + i, column + j);
-			cells[cellIndex].removeAttribute('data-figure');
-		}
 	}
 }
 
 function drawFigure(){
-	const { name, matrix, width, height, row, column } = figure;
+	const { name, matrix, size, row, column } = figure;
 
-	for(let i = 0; i < height; i += 1){
+	for(let i = 0; i < size; i += 1){
 		if(i + row < 0) continue;
 
-		for(let j = 0; j < width; j += 1){
+		for(let j = 0; j < size; j += 1){
 			if(!matrix[i][j]) continue;
 			const cellIndex = elementIndex(row + i, column + j);
 			cells[cellIndex].classList.add(name);
@@ -87,17 +69,27 @@ function drawFigure(){
 }
 
 function redrawingFigure(){
-	// deleteFigure();
 	drawFigure();
 }
 
-function deleteFigure(){
-	const { height, width, row, column } = figure;
+function deletingDateAttributes(){
+	const { size, row, column } = figure;
 
-	for(let i = 0; i < height; i += 1){
+	for(let i = 0; i < size; i += 1){
+		for(let j = 0; j < size; j += 1){
+			const cellIndex = elementIndex(row + i, column + j);
+			cells[cellIndex].removeAttribute('data-figure');
+		}
+	}
+}
+
+function deleteFigure(){
+	const { size, row, column } = figure;
+
+	for(let i = 0; i < size; i += 1){
 		if(i + row < 0) continue;
 
-		for(let j = 0; j < width; j += 1){
+		for(let j = 0; j < size; j += 1){
 			const cellIndex = elementIndex(row + i, column + j);
 			cells[cellIndex].removeAttribute('class');
 			cells[cellIndex].removeAttribute('data-figure');
@@ -105,17 +97,15 @@ function deleteFigure(){
 	}
 }
 
+generatePlayField();
+
+const cells = document.querySelectorAll('.field li');
+
 generateFigure();
+
 drawFigure();
 
-// function draw(){
-// 	cells.forEach(function(cell){cell.removeAttribute('class')});
-// 	drawPlayField();
-// 	drawFigure();
-// 	// redrawingFigure();
-// }
-
-// ------------------------------------
+// s-keydown------------------------------------
 document.addEventListener('keydown', onPressKay);
 
 function onPressKay(e) {
@@ -138,12 +128,11 @@ function onPressKay(e) {
 			break;
 	}
 
-	if (isThereMove) redrawingFigure(); //draw();
+	if (isThereMove) redrawingFigure(); 
 }
 
 function moveFigureDown(){	
-	if (figure.row + figure.height === PLAYFIELD_ROWS || isOverlayingFiguresDown()) {
-		// fixsingFigure();
+	if (figure.row + figure.size === PLAYFIELD_ROWS || isOverlayingFiguresDown()) {
 		deletingDateAttributes();
 		WorkWithFilledRows();
 		generateFigure();
@@ -153,16 +142,6 @@ function moveFigureDown(){
 	isThereMove = true;
 	permissionToMoveFigure('row', 1);
 }
-
-// function fixsingFigure(){
-	// const { length, row, column } = figure;
-
-	// for(let i = 0; i < length; i += 1){
-	// 	for(let j = 0; j < length; j += 1){
-	// 		playField[row + i][column + j] = figureNames[0];
-	// 	}
-	// }
-// }
 
 function moveFigureLeft(){
 	const { column } = figure;
@@ -179,9 +158,9 @@ function moveFigureLeft(){
 }
 
 function moveFigureRight(){
-	const { column, width } = figure;
+	const { column, size } = figure;
 
-	if (column + width === PLAYFIELD_COLUMNS) {
+	if (column + size === PLAYFIELD_COLUMNS) {
 		isThereMove = false;
 		return;
 	}
@@ -204,12 +183,12 @@ function permissionToMoveFigure(directionOfMove, displacementValue) {
 }
  
 function isOverlayingFiguresDown(){
-	const { matrix, width, height, row, column } = figure;
+	const { matrix, size, row, column } = figure;
 	
-	for(let i = 0; i < height; i += 1){
+	for(let i = 0; i < size; i += 1){
 		if(i + row < 0) continue;
 
-		for(let j = 0; j < width; j += 1){
+		for(let j = 0; j < size; j += 1){
 			if(!matrix[i][j]) continue;
 
 			const cellIndex = elementIndex(row + i + 1, column + j);
@@ -222,12 +201,12 @@ function isOverlayingFiguresDown(){
 }
 
 function isOverlayingFiguresToside(offset){
-	const { matrix, height, width, row, column } = figure;
+	const { matrix, size, row, column } = figure;
 	
-	for(let i = 0; i < height; i += 1){
+	for(let i = 0; i < size; i += 1){
 		if(i + row < 0) continue;
 
-		for(let j = 0; j < width; j += 1){
+		for(let j = 0; j < size; j += 1){
 			if(!matrix[i][j]) continue;
 			
 			const cellIndex = elementIndex(row + i, column + j + offset);
@@ -238,17 +217,17 @@ function isOverlayingFiguresToside(offset){
 
 	return false;
 }
-// -----------------------------------------
+
 function WorkWithFilledRows(){
 	const arrayOfFilledRows  = searchForFilledRows();
 	if(arrayOfFilledRows.length) removingFilledRows(arrayOfFilledRows);
 }
 
 function searchForFilledRows(){
-	const { height, row } = figure;
+	const { size, row } = figure;
 	const arrayOfFilledRows = [];
 
-	for(let i = row; i < row + height; i += 1){
+	for(let i = row; i < row + size; i += 1){
 		let quantityOfFilledRows  = 0;
 
 		for(let j = 0; j < PLAYFIELD_COLUMNS; j += 1){
@@ -276,42 +255,30 @@ function removingFilledRows(array){
 		}
 	}
 }
-
-// ------------------------------------
-function rotateFigureLeft(){
-	// for(let i = 0; i < height; i += 1){
-	// 	for(let j = 0; j < width; j += 1){
-	// 		if(!matrix[i][j]) continue;
-			
-	// 		const cellIndex = elementIndex(row + i, column + j + offset);
-	// 		if(cells[cellIndex].hasAttribute('data-figure')) continue;
-	// 		if(cells[cellIndex].hasAttribute('class')) return true;
-	// 	}
-	// }
-}
-
+// f-keydown------------------------------------
+// s-Rotate------------------------------------
 function rotateFigureRight(){
-	figure;
-	const oldMatrix = figure.matrix;
-	const newMatrix = rotateMatrix(figure.matrix);
+	const { matrix } = figure;
+	const oldMatrix = matrix;
+	const newMatrix = rotateMatrix(matrix);
 
 	figure.matrix = newMatrix;
 	deleteFigure();	
 	
-	const temp = figure.height;
-	figure.height = figure.width;
-	figure.width = temp;
+	// const temp = figure.height;
+	// figure.height = figure.width;
+	// figure.width = temp;
 
-	if(figure.width !== figure.height){
-		if(figure.rotate < 3) {
-			figure.rotate += 1;
-		} else {
-			figure.rotate = 0;
-		}
+	// if(figure.width !== figure.height){
+	// 	if(figure.rotate < 3) {
+	// 		figure.rotate += 1;
+	// 	} else {
+	// 		figure.rotate = 0;
+	// 	}
 
-		newFigureRow();
-		newFigureColumn();
-	}
+	// 	newFigureRow();
+	// 	newFigureColumn();
+	// }
 
 
 	// if(isValid()){
@@ -319,42 +286,37 @@ function rotateFigureRight(){
 	// }
 }
 
-function newFigureRow(){
-	switch(figure.rotate){
-		case 0:
-			figure.row += 1;
-			break;
-		case 1:
-			figure.row -= 1;
-			break;
-		case 2:
-			figure.row += 1;
-			break;
-		case 3:
-			figure.row -= 1;
-			break;	
-	}
-}
-
-function newFigureColumn(){
-
-}
+// function newFigureRow(){
+// 	switch(figure.rotate){
+// 		case 0:
+// 			figure.row += 1;
+// 			break;
+// 		case 1:
+// 			figure.row -= 1;
+// 			break;
+// 		case 2:
+// 			figure.row += 1;
+// 			break;
+// 		case 3:
+// 			figure.row -= 1;
+// 			break;	
+// 	}
+// }
 
 function rotateMatrix(matrixFigure){
-	const { height, width } = figure;
+	const { size } = figure;
 
 	const rotateMatrix = [];	
-	rotateMatrix.length = width;
+	rotateMatrix.length = size;
 	
-	for(let j = 0; j < width; j +=1){	
+	for(let j = 0; j < size; j +=1){	
 		rotateMatrix[j] = [];
 
-		for(let i = 0; i < height; i +=1){
-			rotateMatrix[j][i] = matrixFigure[height - i - 1][j];
+		for(let i = 0; i < size; i +=1){
+			rotateMatrix[j][i] = matrixFigure[size - i - 1][j];
 		}
 	}
 
 	return rotateMatrix;
 }
-
-// ------------------------------------
+// f-Rotate------------------------------------
