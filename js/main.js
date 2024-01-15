@@ -1,4 +1,7 @@
 import { 	PLAYFIELD_COLUMNS, PLAYFIELD_ROWS, FIGURES } from './constants.js';
+import { refs } from './refs.js';
+
+const { cells } = refs;
 
 const figureNames = Object.keys(FIGURES);
 
@@ -12,30 +15,6 @@ function elementIndex(row, column) {
 function randomValue (min, max){
 	return Math.floor(Math.random() * (max - min) + min);	
 }
-
-// s-generatePlayField------------------------------
-function generatePlayField(){
-	const field = createField();
-	createFieldElements(field);
-	addPlayFieldInDOM(field);
-}
-
-function createField(){
-	const field = document.createElement('ul');
-	field.classList.add('field');
-	return field;
-}
-
-function createFieldElements(field){
-	for(let i = 0; i < PLAYFIELD_ROWS * PLAYFIELD_COLUMNS; i += 1) {
-		field.append(document.createElement('li'));
-	}
-}
-
-function addPlayFieldInDOM(field){
-	document.querySelector('.tetris').append(field);
-};
-// f-generatePlayField------------------------------
 
 function generateFigure(){   
 	const name = figureNames[randomValue(0, figureNames.length)];
@@ -96,10 +75,6 @@ function deleteFigure(){
 		}
 	}
 }
-
-generatePlayField();
-
-const cells = document.querySelectorAll('.field li');
 
 generateFigure();
 
