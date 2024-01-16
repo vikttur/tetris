@@ -12,16 +12,25 @@ function elementIndex(row, column) {
 	return row * PLAYFIELD_COLUMNS + column;
 }
 
-function randomValue (min, max){
+function isValidIndex(cellIndex) {
+	return cellIndex <= PLAYFIELD_COLUMNS * PLAYFIELD_ROWS - 1;
+}
+
+function randomValue(min, max) {
 	return Math.floor(Math.random() * (max - min) + min);	
 }
 
-function generateFigure(){   
-	const name = figureNames[randomValue(0, figureNames.length)];
+function CenteringTheFigure(columns, size) {
+	return Math.floor((columns - size) / 2);
+}
+
+function generateFigure() { 
+	const figureNumber = randomValue(0, figureNames.length)
+	const name = figureNames[figureNumber];
 	const matrix = FIGURES[name];
 	const size = matrix.length;
 	const row = 1 - size;
-	const column = Math.floor((PLAYFIELD_COLUMNS - size) / 2);
+	const column = CenteringTheFigure(PLAYFIELD_COLUMNS, size);
 	
 	figure = {
 		name,
@@ -32,13 +41,13 @@ function generateFigure(){
 	}
 }
 
-function drawFigure(){
+function drawFigure() {
 	const { name, matrix, size, row, column } = figure;
 
-	for(let i = 0; i < size; i += 1){
+	for(let i = 0; i < size; i += 1) {
 		if(i + row < 0) continue;
 
-		for(let j = 0; j < size; j += 1){
+		for(let j = 0; j < size; j += 1) {
 			if(!matrix[i][j]) continue;
 			const cellIndex = elementIndex(row + i, column + j);
 			cells[cellIndex].classList.add(name);
@@ -47,28 +56,28 @@ function drawFigure(){
 	}
 }
 
-function redrawingFigure(){
+function redrawingFigure() {
 	drawFigure();
 }
 
-function deletingDateAttributes(){
+function deletingDateAttributes() {
 	const { size, row, column } = figure;
 
-	for(let i = 0; i < size; i += 1){
-		for(let j = 0; j < size; j += 1){
+	for(let i = 0; i < size; i += 1) {
+		for(let j = 0; j < size; j += 1) {
 			const cellIndex = elementIndex(row + i, column + j);
-			cells[cellIndex].removeAttribute('data-figure');
+			if(isValidIndex(cellIndex)) cells[cellIndex].removeAttribute('data-figure');
 		}
 	}
 }
 
-function deleteFigure(){
+function deleteFigure() {
 	const { size, row, column } = figure;
 
-	for(let i = 0; i < size; i += 1){
+	for(let i = 0; i < size; i += 1) {
 		if(i + row < 0) continue;
 
-		for(let j = 0; j < size; j += 1){
+		for(let j = 0; j < size; j += 1) {
 			const cellIndex = elementIndex(row + i, column + j);
 			cells[cellIndex].removeAttribute('class');
 			cells[cellIndex].removeAttribute('data-figure');
@@ -98,16 +107,17 @@ function onPressKay(e) {
 			rotateFigureRight();
 			break;	
 		case 'Z':
-			console.log(555);
-			rotateFigureLeft();
+			// console.log(555);
+			// rotateFigureLeft();
 			break;
 	}
 
 	if (isThereMove) redrawingFigure(); 
 }
-
-function moveFigureDown(){	
-	if (figure.row + figure.size === PLAYFIELD_ROWS || isOverlayingFiguresDown()) {
+// f-keydown------------------------------------
+// f-Down------------------------------------
+function moveFigureDown() {
+	if(!checkingToMoveDown()) {
 		deletingDateAttributes();
 		WorkWithFilledRows();
 		generateFigure();
@@ -118,49 +128,32 @@ function moveFigureDown(){
 	permissionToMoveFigure('row', 1);
 }
 
-function moveFigureLeft(){
-	const { column } = figure;
+function checkingToMoveDown() {
+	const { row, size } = figure;
 
-	if(column === 0) {
-		isThereMove = false;
-		return;
-	}
+	if (row + size >= PLAYFIELD_ROWS) {
+		const rowToCheck = PLAYFIELD_ROWS - row - 1;
+		console.log(isExitFromFieldToDown(rowToCheck));
+		if(isExitFromFieldToDown(rowToCheck)) return;
+	};
 
-	if(isOverlayingFiguresToside(-1)) return;
-
-	isThereMove = true;
-	permissionToMoveFigure('column', -1);
+	if(isOverlayingFiguresFromDown()) return;
+	return true;
 }
 
-function moveFigureRight(){
-	const { column, size } = figure;
+function isExitFromFieldToDown(rowToCheck) {
+	const { matrix, size, row, column } = figure;
 
-	if (column + size === PLAYFIELD_COLUMNS) {
-		isThereMove = false;
-		return;
+	for(let j = 0; j < size; j += 1) {
+		if(!matrix[rowToCheck][j]) continue;
+		return true;	
 	}
-	
-	if(isOverlayingFiguresToside(1)) return;
-
-	isThereMove = true;
-	permissionToMoveFigure('column', 1);
 }
 
-function permissionToMoveFigure(directionOfMove, displacementValue) {
-	deleteFigure();
-
-	if(directionOfMove === 'row') {
-		figure.row += displacementValue;
-		return;
-	}
-
-	figure.column += displacementValue;
-}
- 
-function isOverlayingFiguresDown(){
+function isOverlayingFiguresFromDown() {
 	const { matrix, size, row, column } = figure;
 	
-	for(let i = 0; i < size; i += 1){
+	for(let i = 0; i < size; i += 1) {
 		if(i + row < 0) continue;
 
 		for(let j = 0; j < size; j += 1){
@@ -174,14 +167,63 @@ function isOverlayingFiguresDown(){
 
 	return false;	
 }
+// f-Down------------------------------------
+// s-Left or Right------------------------------------
+function moveFigureLeft() {
+	if(!checkingToMoveLeft()) return;
 
-function isOverlayingFiguresToside(offset){
+	isThereMove = true;
+	permissionToMoveFigure('column', -1);
+}
+
+function moveFigureRight() {
+	if(!checkingToMoveRight()) return;
+
+	isThereMove = true;
+	permissionToMoveFigure('column', 1);
+}
+
+function checkingToMoveLeft() {
+	const { column } = figure;
+
+	if(column <= 0) {
+		const columnToCheck = 0 - column;
+		if(isExitFromFieldToSide(columnToCheck)) return;
+	}
+
+	if(isOverlayingFiguresFromSide(-1)) return false;
+	return true;
+}
+
+function checkingToMoveRight() {
+	const { column, size } = figure;
+
+	if (column + size >= PLAYFIELD_COLUMNS) {
+		const columnToCheck = PLAYFIELD_COLUMNS - column - 1;
+		if(isExitFromFieldToSide(columnToCheck)) return;
+	}
+
+	if(isOverlayingFiguresFromSide(1)) return;
+	return true;
+}
+
+function isExitFromFieldToSide(columnToCheck) {
+	const { matrix, size, row, column } = figure;
+
+	for(let i = 0; i < size; i += 1) {
+		if(i + row < 0) continue;
+		if(!matrix[i][columnToCheck]) continue;
+		return true;	
+	}
+}
+
+function isOverlayingFiguresFromSide(offset) {
 	const { matrix, size, row, column } = figure;
 	
-	for(let i = 0; i < size; i += 1){
+	for(let i = 0; i < size; i += 1) {
 		if(i + row < 0) continue;
 
-		for(let j = 0; j < size; j += 1){
+		for(let j = 0; j < size; j += 1) {
 			if(!matrix[i][j]) continue;
 			
 			const cellIndex = elementIndex(row + i, column + j + offset);
@@ -192,22 +234,45 @@ function isOverlayingFiguresToside(offset){
 
 	return false;
 }
+// f-Left or Right------------------------------------
+// s-Down, Left or Right------------------------------------
+function permissionToMoveFigure(directionOfMove, displacementValue) {
+	deleteFigure();
 
-function WorkWithFilledRows(){
+	if(directionOfMove === 'row') {
+		figure.row += displacementValue;
+		return;
+	}
+
+	figure.column += displacementValue;
+}
+
+function WorkWithFilledRows() {
 	const arrayOfFilledRows  = searchForFilledRows();
 	if(arrayOfFilledRows.length) removingFilledRows(arrayOfFilledRows);
 }
+// f-Down, Left or Right------------------------------------
 
-function searchForFilledRows(){
+
+
+
+
+
+
+
+function searchForFilledRows() {
 	const { size, row } = figure;
 	const arrayOfFilledRows = [];
 
-	for(let i = row; i < row + size; i += 1){
+	for(let i = row; i < row + size; i += 1) {
 		let quantityOfFilledRows  = 0;
 
-		for(let j = 0; j < PLAYFIELD_COLUMNS; j += 1){
+		for(let j = 0; j < PLAYFIELD_COLUMNS; j += 1) {
 			const cellIndex = elementIndex(i, j);
-			if(cells[cellIndex].hasAttribute('class')) quantityOfFilledRows += 1;
+			
+			if(isValidIndex(cellIndex)) {
+				if(cells[cellIndex].hasAttribute('class')) quantityOfFilledRows += 1;
+			}
 		}
 
 		if(quantityOfFilledRows === PLAYFIELD_COLUMNS) arrayOfFilledRows.push(i);
@@ -216,12 +281,12 @@ function searchForFilledRows(){
 	return arrayOfFilledRows;
 }
 
-function removingFilledRows(array){
-	for(let n = 0; n < array.length; n += 1){
+function removingFilledRows(array) {
+	for(let n = 0; n < array.length; n += 1) {
 		const lastRow = array;
 
-		for(let i = lastRow; i > 0; i -= 1){
-			for(let j = 0; j < PLAYFIELD_COLUMNS; j += 1){
+		for(let i = lastRow; i > 0; i -= 1) {
+			for(let j = 0; j < PLAYFIELD_COLUMNS; j += 1) {
 				const cellIndexUp = elementIndex(i - 1, j); // як бути з першим рядком?
 				const cellIndexDown = elementIndex(i, j);
 
@@ -230,9 +295,9 @@ function removingFilledRows(array){
 		}
 	}
 }
-// f-keydown------------------------------------
+
 // s-Rotate------------------------------------
-function rotateFigureRight(){
+function rotateFigureRight() {
 	const { matrix } = figure;
 	const oldMatrix = matrix;
 	const newMatrix = rotateMatrix(matrix);
@@ -244,7 +309,7 @@ function rotateFigureRight(){
 	// figure.height = figure.width;
 	// figure.width = temp;
 
-	// if(figure.width !== figure.height){
+	// if(figure.width !== figure.height) {
 	// 	if(figure.rotate < 3) {
 	// 		figure.rotate += 1;
 	// 	} else {
@@ -256,13 +321,13 @@ function rotateFigureRight(){
 	// }
 
 
-	// if(isValid()){
+	// if(isValid()) {
 	// 	figure.matrix = oldMatrix;
 	// }
 }
 
-// function newFigureRow(){
-// 	switch(figure.rotate){
+// function newFigureRow() {
+// 	switch(figure.rotate) {
 // 		case 0:
 // 			figure.row += 1;
 // 			break;
@@ -278,16 +343,16 @@ function rotateFigureRight(){
 // 	}
 // }
 
-function rotateMatrix(matrixFigure){
+function rotateMatrix(matrixFigure) {
 	const { size } = figure;
 
 	const rotateMatrix = [];	
 	rotateMatrix.length = size;
 	
-	for(let j = 0; j < size; j +=1){	
+	for(let j = 0; j < size; j +=1) {	
 		rotateMatrix[j] = [];
 
-		for(let i = 0; i < size; i +=1){
+		for(let i = 0; i < size; i +=1) {
 			rotateMatrix[j][i] = matrixFigure[size - i - 1][j];
 		}
 	}
