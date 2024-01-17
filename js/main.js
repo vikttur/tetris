@@ -13,7 +13,9 @@ function elementIndex(row, column) {
 }
 
 function isValidIndex(cellIndex) {
-	return cellIndex <= PLAYFIELD_COLUMNS * PLAYFIELD_ROWS - 1;
+	if(cellIndex < 0) return;
+	if(cellIndex > PLAYFIELD_COLUMNS * PLAYFIELD_ROWS - 1) return;
+	return true;
 }
 
 function randomValue(min, max) {
@@ -50,6 +52,7 @@ function drawFigure() {
 		for(let j = 0; j < size; j += 1) {
 			if(!matrix[i][j]) continue;
 			const cellIndex = elementIndex(row + i, column + j);
+			if(!isValidIndex(cellIndex)) continue;
 			cells[cellIndex].classList.add(name);
 			cells[cellIndex].setAttribute('data-figure', 'new');
 		}
@@ -66,7 +69,8 @@ function deletingDateAttributes() {
 	for(let i = 0; i < size; i += 1) {
 		for(let j = 0; j < size; j += 1) {
 			const cellIndex = elementIndex(row + i, column + j);
-			if(isValidIndex(cellIndex)) cells[cellIndex].removeAttribute('data-figure');
+			if(!isValidIndex(cellIndex)) continue;
+			cells[cellIndex].removeAttribute('data-figure');
 		}
 	}
 }
@@ -79,6 +83,7 @@ function deleteFigure() {
 
 		for(let j = 0; j < size; j += 1) {
 			const cellIndex = elementIndex(row + i, column + j);
+			if(!isValidIndex(cellIndex)) continue;
 			cells[cellIndex].removeAttribute('class');
 			cells[cellIndex].removeAttribute('data-figure');
 		}
@@ -133,7 +138,6 @@ function checkingToMoveDown() {
 
 	if (row + size >= PLAYFIELD_ROWS) {
 		const rowToCheck = PLAYFIELD_ROWS - row - 1;
-		console.log(isExitFromFieldToDown(rowToCheck));
 		if(isExitFromFieldToDown(rowToCheck)) return;
 	};
 
@@ -141,7 +145,7 @@ function checkingToMoveDown() {
 	return true;
 }
 
-function isExitFromFieldToDown(rowToCheck) {
+function isExitFromFieldToDown(rowToCheck) { //is Outside Bottom border
 	const { matrix, size, row, column } = figure;
 
 	for(let j = 0; j < size; j += 1) {
@@ -211,7 +215,6 @@ function isExitFromFieldToSide(columnToCheck) {
 	const { matrix, size, row, column } = figure;
 
 	for(let i = 0; i < size; i += 1) {
-		if(i + row < 0) continue;
 		if(!matrix[i][columnToCheck]) continue;
 		return true;	
 	}
@@ -253,13 +256,7 @@ function WorkWithFilledRows() {
 }
 // f-Down, Left or Right------------------------------------
 
-
-
-
-
-
-
-
+// s-FilledRows------------------------------------
 function searchForFilledRows() {
 	const { size, row } = figure;
 	const arrayOfFilledRows = [];
@@ -295,7 +292,7 @@ function removingFilledRows(array) {
 		}
 	}
 }
-
+// f-FilledRows------------------------------------
 // s-Rotate------------------------------------
 function rotateFigureRight() {
 	const { matrix } = figure;
@@ -303,60 +300,48 @@ function rotateFigureRight() {
 	const newMatrix = rotateMatrix(matrix);
 
 	figure.matrix = newMatrix;
-	deleteFigure();	
 	
-	// const temp = figure.height;
-	// figure.height = figure.width;
-	// figure.width = temp;
+	if(!isPermissionToRotate()) {
+		figure.matrix = oldMatrix;
+		return;
+	}	
 
-	// if(figure.width !== figure.height) {
-	// 	if(figure.rotate < 3) {
-	// 		figure.rotate += 1;
-	// 	} else {
-	// 		figure.rotate = 0;
-	// 	}
-
-	// 	newFigureRow();
-	// 	newFigureColumn();
-	// }
-
-
-	// if(isValid()) {
-	// 	figure.matrix = oldMatrix;
-	// }
+	deleteFigure();
 }
 
-// function newFigureRow() {
-// 	switch(figure.rotate) {
-// 		case 0:
-// 			figure.row += 1;
-// 			break;
-// 		case 1:
-// 			figure.row -= 1;
-// 			break;
-// 		case 2:
-// 			figure.row += 1;
-// 			break;
-// 		case 3:
-// 			figure.row -= 1;
-// 			break;	
-// 	}
-// }
-
-function rotateMatrix(matrixFigure) {
-	const { size } = figure;
-
-	const rotateMatrix = [];	
-	rotateMatrix.length = size;
+function isPermissionToRotate() {
+	const { matrix, size, row, column } = figure;
 	
-	for(let j = 0; j < size; j +=1) {	
-		rotateMatrix[j] = [];
+	for(let i = 0; i < size; i += 1) {
+		if(i + row < 0) continue;
+		// if(isExitFromFieldToDown(i)) return;
 
-		for(let i = 0; i < size; i +=1) {
-			rotateMatrix[j][i] = matrixFigure[size - i - 1][j];
+		for(let j = 0; j < size; j += 1){
+			if(!matrix[i][j]) continue;
+			// if(isExitFromFieldToSide(j)) return;
+
+			const cellIndex = elementIndex(row + i + 1, column + j);
+			// if(cells[cellIndex].hasAttribute('class')) return;
 		}
 	}
 
-	return rotateMatrix;
+	return true;
+}
+
+function rotateMatrix(matrixForRotation) {
+	const { size } = figure;
+
+	const newMatrix = [];	
+	newMatrix.length = size;
+	
+	for(let j = 0; j < size; j +=1) {	
+		newMatrix[j] = [];
+
+		for(let i = 0; i < size; i +=1) {
+			newMatrix[j][i] = matrixForRotation[size - i - 1][j];
+		}
+	}
+
+	return newMatrix;
 }
 // f-Rotate------------------------------------
