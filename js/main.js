@@ -22,20 +22,40 @@ function randomValue(min, max) {
 	return Math.floor(Math.random() * (max - min) + min);	
 }
 
-function CenteringTheFigure(columns, size) {
-	return Math.floor((columns - size) / 2);
+function initialRowOfFigure(matrix, size) {
+	let row = 1;
+
+	for(let i = size - 1; i > 0; i -= 1) {
+		for(let j = 0; j < size; j += 1) {
+			if(matrix[i][j]) return row - size;
+		}
+
+		row += 1;
+	}
+}
+
+function initialColumnOfFigure(matrix) {
+	const adjustment = columnAdjustment(matrix);
+	return Math.floor((PLAYFIELD_COLUMNS - matrix.length) / 2) + adjustment;
+}
+
+function columnAdjustment(matrix) {
+	const j = matrix.length;
+
+	for(let i = 0; i < j; i += 1) {
+		if(matrix[i][j - 1]) return 0;
+	}
+
+	return 1;
 }
 
 function generateFigure() { 
-	const figureNumber = randomValue(0, figureNames.length);
+	const figureNumber = 2;//randomValue(0, figureNames.length);
 	const name = figureNames[figureNumber];
-	// let matrix = FIGURES[name];
-	// console.log(FIGURES[name]);
-	const matrix = initialRotate(FIGURES[name]);
-	// console.log(matrix);
+	const matrix = initialMatrixRotate(FIGURES[name]);
 	const size = matrix.length;
-	const row = 1 - size;
-	const column = CenteringTheFigure(PLAYFIELD_COLUMNS, size);
+	const row = initialRowOfFigure(matrix, size);
+	const column = initialColumnOfFigure(matrix);
 	
 	figure = {
 		name,
@@ -298,7 +318,7 @@ function removingFilledRows(array) {
 // f-FilledRows------------------------------------
 // s-Rotate------------------------------------
 
-function initialRotate(initialMatrix) {
+function initialMatrixRotate(initialMatrix) {
 	const n = randomValue(0, 4);
 
 	for(let i = 0; i < n; i += 1) {
