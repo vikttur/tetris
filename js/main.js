@@ -27,9 +27,12 @@ function CenteringTheFigure(columns, size) {
 }
 
 function generateFigure() { 
-	const figureNumber = randomValue(0, figureNames.length)
+	const figureNumber = randomValue(0, figureNames.length);
 	const name = figureNames[figureNumber];
-	const matrix = FIGURES[name];
+	// let matrix = FIGURES[name];
+	// console.log(FIGURES[name]);
+	const matrix = initialRotate(FIGURES[name]);
+	// console.log(matrix);
 	const size = matrix.length;
 	const row = 1 - size;
 	const column = CenteringTheFigure(PLAYFIELD_COLUMNS, size);
@@ -294,6 +297,17 @@ function removingFilledRows(array) {
 }
 // f-FilledRows------------------------------------
 // s-Rotate------------------------------------
+
+function initialRotate(initialMatrix) {
+	const n = randomValue(0, 4);
+
+	for(let i = 0; i < n; i += 1) {
+		initialMatrix = rotateMatrix(initialMatrix);
+	}
+
+	return initialMatrix; 
+}
+
 function rotateFigureRight() {
 	const { matrix } = figure;
 	const oldMatrix = matrix;
@@ -329,7 +343,7 @@ function isPermissionToRotate() {
 }
 
 function rotateMatrix(matrixForRotation) {
-	const { size } = figure;
+	const size = matrixForRotation.length;
 
 	const newMatrix = [];	
 	newMatrix.length = size;
