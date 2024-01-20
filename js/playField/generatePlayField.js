@@ -1,4 +1,4 @@
-import { 	PLAYFIELD_COLUMNS, PLAYFIELD_ROWS } from './constants.js';
+import { 	PLAYFIELD_COLUMNS, PLAYFIELD_ROWS } from '../constants.js';
 
 export  function generatePlayField(){
 	const field = createField();
@@ -21,7 +21,3 @@ function createFieldElements(field){
 function addPlayFieldInDOM(field){
 	document.querySelector('.tetris').append(field);
 };
-
-export function elementsOfPlayField() {
-  return document.querySelectorAll('.field li');
-}

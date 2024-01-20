@@ -1,83 +1,18 @@
 import { PLAYFIELD_COLUMNS, PLAYFIELD_ROWS, FIGURES } from './constants.js';
-import { generatePlayField, elementsOfPlayField } from './generatePlayField.js';
-import { generateFigure } from './generateFigure.js'
-import { randomValue, elementIndex, isValidIndex, initialRowOfFigure, initialColumnOfFigure} from './utils.js';
+import { generatePlayField, elementsOfPlayField } from './playField/index.js';
+import { generateFigure, drawFigure, deleteFigure, deletingDateAttributes } from './figure/index.js'
+import { randomValue, elementIndex, isValidIndex} from './utils.js';
+
+let isThereMove = true;
+let figure = {};
 
 generatePlayField();
 const cells = elementsOfPlayField();
 
 const figureNames = Object.keys(FIGURES);
-let figure = generateFigure(figureNames);
-
-let isThereMove = true;
-
-// function generateFigure() { 
-// 	const figureNumber = randomValue(0, figureNames.length);
-// 	const name = figureNames[figureNumber];
-// 	const matrix = initialMatrixRotate(FIGURES[name]);
-// 	const size = matrix.length;
-// 	const row = initialRowOfFigure(matrix, size);
-// 	const column = initialColumnOfFigure(matrix);
-	
-// 	figure = {
-// 		name,
-// 		matrix,
-// 		size,
-// 		row,
-// 		column,
-// 	}
-// }
-
-function drawFigure() {
-	const { name, matrix, size, row, column } = figure;
-
-	for(let i = 0; i < size; i += 1) {
-		if(i + row < 0) continue;
-
-		for(let j = 0; j < size; j += 1) {
-			if(!matrix[i][j]) continue;
-			const cellIndex = elementIndex(row + i, column + j);
-			if(!isValidIndex(cellIndex)) continue;
-			cells[cellIndex].classList.add(name);
-			cells[cellIndex].setAttribute('data-figure', 'new');
-		}
-	}
-}
-
-function redrawingFigure() {
-	drawFigure();
-}
-
-function deletingDateAttributes() {
-	const { size, row, column } = figure;
-
-	for(let i = 0; i < size; i += 1) {
-		for(let j = 0; j < size; j += 1) {
-			const cellIndex = elementIndex(row + i, column + j);
-			if(!isValidIndex(cellIndex)) continue;
-			cells[cellIndex].removeAttribute('data-figure');
-		}
-	}
-}
-
-function deleteFigure() {
-	const { size, row, column } = figure;
-
-	for(let i = 0; i < size; i += 1) {
-		if(i + row < 0) continue;
-
-		for(let j = 0; j < size; j += 1) {
-			const cellIndex = elementIndex(row + i, column + j);
-			if(!isValidIndex(cellIndex)) continue;
-			cells[cellIndex].removeAttribute('class');
-			cells[cellIndex].removeAttribute('data-figure');
-		}
-	}
-}
-
 figure = generateFigure(figureNames);
 
-drawFigure();
+drawFigure(cells, figure);
 
 // s-keydown------------------------------------
 document.addEventListener('keydown', onPressKay);
@@ -102,13 +37,13 @@ function onPressKay(e) {
 			break;
 	}
 
-	if (isThereMove) redrawingFigure(); 
+	if (isThereMove) drawFigure(cells, figure); 
 }
 // f-keydown------------------------------------
 // f-Down------------------------------------
 function moveFigureDown() {
 	if(!checkingToMoveDown()) {
-		deletingDateAttributes();
+		deletingDateAttributes(cells, figure);
 		WorkWithFilledRows();
 		figure = generateFigure(figureNames);
 		return;
@@ -225,7 +160,7 @@ function isOverlayingFiguresFromSide(offset) {
 // f-Left or Right------------------------------------
 // s-Down, Left or Right------------------------------------
 function permissionToMoveFigure(directionOfMove, displacementValue) {
-	deleteFigure();
+	deleteFigure(cells, figure);
 
 	if(directionOfMove === 'row') {
 		figure.row += displacementValue;
@@ -301,7 +236,7 @@ function rotateFigureRight() {
 		return;
 	}	
 
-	deleteFigure();
+	deleteFigure(cells, figure);
 }
 
 function isPermissionToRotate() {
