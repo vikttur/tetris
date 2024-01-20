@@ -1,7 +1,8 @@
 import { PLAYFIELD_COLUMNS, PLAYFIELD_ROWS, FIGURES } from './constants.js';
 import { generatePlayField, elementsOfPlayField } from './playField/index.js';
 import { generateFigure, drawFigure, deleteFigure, deletingDateAttributes } from './figure/index.js'
-import { randomValue, elementIndex, isValidIndex} from './helpers/index.js';
+import { elementIndex, isValidIndex} from './helpers/index.js';
+import { rotateFigureRight } from './rotateFigure.js'
 
 let isThereMove = true;
 let figure = {};
@@ -29,7 +30,7 @@ function onPressKay(e) {
 			moveFigureRight();
 			break;
 		case 'ArrowUp':
-			rotateFigureRight();
+			rotateFigureRight(cells, figure);
 			break;	
 		case 'Z':
 			// console.log(555);
@@ -213,65 +214,4 @@ function removingFilledRows(array) {
 	}
 }
 // f-FilledRows------------------------------------
-// s-Rotate------------------------------------
-export function initialMatrixRotate(initialMatrix) {
-	const n = randomValue(0, 4);
 
-	for(let i = 0; i < n; i += 1) {
-		initialMatrix = rotateMatrix(initialMatrix);
-	}
-
-	return initialMatrix; 
-}
-
-function rotateFigureRight() {
-	const { matrix } = figure;
-	const oldMatrix = matrix;
-	const newMatrix = rotateMatrix(matrix);
-
-	figure.matrix = newMatrix;
-	
-	if(!isPermissionToRotate()) {
-		figure.matrix = oldMatrix;
-		return;
-	}	
-
-	deleteFigure(cells, figure);
-}
-
-function isPermissionToRotate() {
-	const { matrix, size, row, column } = figure;
-	
-	for(let i = 0; i < size; i += 1) {
-		if(i + row < 0) continue;
-		// if(isExitFromFieldToDown(i)) return;
-
-		for(let j = 0; j < size; j += 1){
-			if(!matrix[i][j]) continue;
-			// if(isExitFromFieldToSide(j)) return;
-
-			const cellIndex = elementIndex(row + i + 1, column + j);
-			// if(cells[cellIndex].hasAttribute('class')) return;
-		}
-	}
-
-	return true;
-}
-
-function rotateMatrix(matrixForRotation) {
-	const size = matrixForRotation.length;
-
-	const newMatrix = [];	
-	newMatrix.length = size;
-	
-	for(let j = 0; j < size; j +=1) {	
-		newMatrix[j] = [];
-
-		for(let i = 0; i < size; i +=1) {
-			newMatrix[j][i] = matrixForRotation[size - i - 1][j];
-		}
-	}
-
-	return newMatrix;
-}
-// f-Rotate------------------------------------
