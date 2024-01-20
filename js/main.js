@@ -1,30 +1,32 @@
-import { 	PLAYFIELD_COLUMNS, PLAYFIELD_ROWS, FIGURES } from './constants.js';
-import { refs } from './refs.js';
+import { PLAYFIELD_COLUMNS, PLAYFIELD_ROWS, FIGURES } from './constants.js';
+import { generatePlayField, elementsOfPlayField } from './generatePlayField.js';
+import { generateFigure } from './generateFigure.js'
 import { randomValue, elementIndex, isValidIndex, initialRowOfFigure, initialColumnOfFigure} from './utils.js';
 
-const { cells } = refs;
+generatePlayField();
+const cells = elementsOfPlayField();
 
 const figureNames = Object.keys(FIGURES);
+let figure = generateFigure(figureNames);
 
-let figure = {};
 let isThereMove = true;
 
-function generateFigure() { 
-	const figureNumber = randomValue(0, figureNames.length);
-	const name = figureNames[figureNumber];
-	const matrix = initialMatrixRotate(FIGURES[name]);
-	const size = matrix.length;
-	const row = initialRowOfFigure(matrix, size);
-	const column = initialColumnOfFigure(matrix);
+// function generateFigure() { 
+// 	const figureNumber = randomValue(0, figureNames.length);
+// 	const name = figureNames[figureNumber];
+// 	const matrix = initialMatrixRotate(FIGURES[name]);
+// 	const size = matrix.length;
+// 	const row = initialRowOfFigure(matrix, size);
+// 	const column = initialColumnOfFigure(matrix);
 	
-	figure = {
-		name,
-		matrix,
-		size,
-		row,
-		column,
-	}
-}
+// 	figure = {
+// 		name,
+// 		matrix,
+// 		size,
+// 		row,
+// 		column,
+// 	}
+// }
 
 function drawFigure() {
 	const { name, matrix, size, row, column } = figure;
@@ -73,7 +75,7 @@ function deleteFigure() {
 	}
 }
 
-generateFigure();
+figure = generateFigure(figureNames);
 
 drawFigure();
 
@@ -108,7 +110,7 @@ function moveFigureDown() {
 	if(!checkingToMoveDown()) {
 		deletingDateAttributes();
 		WorkWithFilledRows();
-		generateFigure();
+		figure = generateFigure(figureNames);
 		return;
 	}
 
@@ -277,8 +279,7 @@ function removingFilledRows(array) {
 }
 // f-FilledRows------------------------------------
 // s-Rotate------------------------------------
-
-function initialMatrixRotate(initialMatrix) {
+export function initialMatrixRotate(initialMatrix) {
 	const n = randomValue(0, 4);
 
 	for(let i = 0; i < n; i += 1) {
