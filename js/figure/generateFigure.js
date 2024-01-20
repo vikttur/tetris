@@ -1,5 +1,5 @@
 import { FIGURES } from '../constants.js';
-import { randomValue, initialRowOfFigure, initialColumnOfFigure } from '../utils.js';
+import { randomValue, initialRowOfFigure, initialColumnOfFigure } from '../helpers/index.js';
 import { initialMatrixRotate } from '../main.js'
 
 export function generateFigure(figureNames) { 

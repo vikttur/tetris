@@ -1,18 +1,4 @@
-import { PLAYFIELD_COLUMNS, PLAYFIELD_ROWS } from './constants.js';
-
-export function randomValue(min, max) {
-	return Math.floor(Math.random() * (max - min) + min);	
-}
-
-export function elementIndex(row, column) {
-	return row * PLAYFIELD_COLUMNS + column;
-}
-
-export function isValidIndex(cellIndex) {
-	if(cellIndex < 0) return;
-	if(cellIndex > PLAYFIELD_COLUMNS * PLAYFIELD_ROWS - 1) return;
-	return true;
-}
+import { PLAYFIELD_COLUMNS } from '../constants.js';
 
 export function initialRowOfFigure(matrix, size) {
 	let row = 1;

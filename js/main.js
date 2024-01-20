@@ -1,7 +1,7 @@
 import { PLAYFIELD_COLUMNS, PLAYFIELD_ROWS, FIGURES } from './constants.js';
 import { generatePlayField, elementsOfPlayField } from './playField/index.js';
 import { generateFigure, drawFigure, deleteFigure, deletingDateAttributes } from './figure/index.js'
-import { randomValue, elementIndex, isValidIndex} from './utils.js';
+import { randomValue, elementIndex, isValidIndex} from './helpers/index.js';
 
 let isThereMove = true;
 let figure = {};

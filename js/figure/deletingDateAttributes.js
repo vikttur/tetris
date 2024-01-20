@@ -1,5 +1,5 @@
 
-import { elementIndex, isValidIndex } from '../utils.js';
+import { elementIndex, isValidIndex } from '../helpers/index.js';
 
 export function deletingDateAttributes(cells, figure) {
 	const { size, row, column } = figure;

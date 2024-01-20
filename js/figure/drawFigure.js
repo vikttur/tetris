@@ -1,4 +1,4 @@
-import { elementIndex, isValidIndex } from '../utils.js';
+import { elementIndex, isValidIndex } from '../helpers/index.js';
 
 export function drawFigure(cells, figure) {
 	const { name, matrix, size, row, column } = figure;
