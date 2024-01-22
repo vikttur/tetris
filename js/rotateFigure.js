@@ -27,6 +27,21 @@ export function rotateFigureRight(cells, figure) {
 	deleteFigure(cells, figure);
 }
 
+export function rotateFigureLeft(cells, figure) {
+	const { matrix } = figure;
+	const oldMatrix = matrix;
+	const newMatrix = rotateMatrix(matrix);
+
+	figure.matrix = newMatrix;
+	
+	if(!isPermissionToRotate(figure)) {
+		figure.matrix = oldMatrix;
+		return;
+	}	
+
+	deleteFigure(cells, figure);
+}
+
 function rotateMatrix(matrixForRotation) {
 	const size = matrixForRotation.length;
 
@@ -37,7 +52,7 @@ function rotateMatrix(matrixForRotation) {
 		newMatrix[j] = [];
 
 		for(let i = 0; i < size; i +=1) {
-			newMatrix[j][i] = matrixForRotation[size - i - 1][j];
+			newMatrix[j][i] = matrixForRotation[i][size - j - 1];
 		}
 	}
 

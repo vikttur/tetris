@@ -2,7 +2,7 @@ import { PLAYFIELD_COLUMNS, PLAYFIELD_ROWS, FIGURES } from './constants.js';
 import { generatePlayField, elementsOfPlayField } from './playField/index.js';
 import { generateFigure, drawFigure, deleteFigure, deletingDateAttributes } from './figure/index.js'
 import { elementIndex, isValidIndex} from './helpers/index.js';
-import { rotateFigureRight } from './rotateFigure.js'
+import { onPressKay } from './onPressKey.js'
 
 let isThereMove = true;
 let figure = {};
@@ -15,34 +15,10 @@ figure = generateFigure(figureNames);
 
 drawFigure(cells, figure);
 
-// s-keydown------------------------------------
 document.addEventListener('keydown', onPressKay);
 
-function onPressKay(e) {
-	switch(e.key){
-		case 'ArrowDown':
-			moveFigureDown();
-			break;
-		case 'ArrowLeft':
-			moveFigureLeft();
-			break;
-		case 'ArrowRight':
-			moveFigureRight();
-			break;
-		case 'ArrowUp':
-			rotateFigureRight(cells, figure);
-			break;	
-		case 'Z':
-			// console.log(555);
-			// rotateFigureLeft();
-			break;
-	}
-
-	if (isThereMove) drawFigure(cells, figure); 
-}
-// f-keydown------------------------------------
 // f-Down------------------------------------
-function moveFigureDown() {
+export function moveFigureDown() {
 	if(!checkingToMoveDown()) {
 		deletingDateAttributes(cells, figure);
 		WorkWithFilledRows();
@@ -94,14 +70,14 @@ function isOverlayingFiguresFromDown() {
 }
 // f-Down------------------------------------
 // s-Left or Right------------------------------------
-function moveFigureLeft() {
+export function moveFigureLeft() {
 	if(!checkingToMoveLeft()) return;
 
 	isThereMove = true;
 	permissionToMoveFigure('column', -1);
 }
 
-function moveFigureRight() {
+export function moveFigureRight() {
 	if(!checkingToMoveRight()) return;
 
 	isThereMove = true;
