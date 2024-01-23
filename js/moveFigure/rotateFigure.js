@@ -1,5 +1,5 @@
-import { randomValue, elementIndex } from './helpers/index.js'
-import { deleteFigure } from './figure/index.js'
+import { randomValue, elementIndex } from '../helpers/index.js'
+import { deleteFigure } from '../figure/index.js'
 
 
 export function firstRotationOfMatrix(initialMatrix) {

@@ -4,11 +4,11 @@ import { generateFigure, drawFigure, deleteFigure, deletingDateAttributes } from
 import { elementIndex, isValidIndex} from './helpers/index.js';
 import { onPressKay } from './onPressKey.js'
 
-let isThereMove = true;
-let figure = {};
+export let isThereMove = true;
+export let figure = {};
 
 generatePlayField();
-const cells = elementsOfPlayField();
+export const cells = elementsOfPlayField();
 
 const figureNames = Object.keys(FIGURES);
 figure = generateFigure(figureNames);

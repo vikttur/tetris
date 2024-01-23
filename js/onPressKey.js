@@ -1,5 +1,5 @@
-import { moveFigureDown, moveFigureLeft, moveFigureRight } from './main.js';
-import { rotateFigureRight, rotateFigureLeft } from './rotateFigure.js';
+import { isThereMove, cells, figure, moveFigureDown, moveFigureLeft, moveFigureRight } from './main.js';
+import { rotateFigureRight, rotateFigureLeft } from './moveFigure/rotateFigure.js';
 import { drawFigure } from './figure/drawFigure.js';
 
 
