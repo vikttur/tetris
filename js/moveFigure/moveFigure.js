@@ -172,6 +172,8 @@ function removingFilledRows(array) {
 				const cellIndexUp = elementIndex(i - 1, j); // як бути з першим рядком?
 				const cellIndexDown = elementIndex(i, j);
 
+        cells[cellIndexDown].removeAttribute('class');
+        if(!cells[cellIndexUp].hasAttribute('class')) continue;
 				cells[cellIndexDown].classList = cells[cellIndexUp].classList;
 			}
 		}
