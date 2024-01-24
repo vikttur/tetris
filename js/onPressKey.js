@@ -1,7 +1,8 @@
-import { isThereMove, cells, figure, moveFigureDown, moveFigureLeft, moveFigureRight } from './main.js';
+import { cells, figure } from './main.js';
 import { rotateFigureRight, rotateFigureLeft } from './moveFigure/rotateFigure.js';
+import { moveFigureDown, moveFigureLeft, moveFigureRight } from './moveFigure/moveFigure.js';
 import { drawFigure } from './figure/drawFigure.js';
-
+import { isThereMove } from './moveFigure/moveFigure.js';
 
 export  function onPressKay(e) {
 	switch(e.key.toLowerCase()){
