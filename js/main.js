@@ -16,4 +16,3 @@ document.addEventListener('keydown', onPressKay);
 export function generateNewFigure() {
   figure = generateFigure(figureNames);
 }
-

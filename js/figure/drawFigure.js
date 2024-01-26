@@ -8,8 +8,10 @@ export function drawFigure(cells, figure) {
 
 		for(let j = 0; j < size; j += 1) {
 			if(!matrix[i][j]) continue;
+			
 			const cellIndex = elementIndex(row + i, column + j);
 			if(!isValidIndex(cellIndex)) continue;
+
 			cells[cellIndex].classList.add(name);
 			cells[cellIndex].setAttribute('data-figure', 'new');
 		}

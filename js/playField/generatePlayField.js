@@ -1,6 +1,6 @@
 import { 	PLAYFIELD_COLUMNS, PLAYFIELD_ROWS } from '../constants.js';
 
-export  function generatePlayField(){
+export function generatePlayField(){
 	const field = createField();
 	createFieldElements(field);
 	addPlayFieldInDOM(field);
