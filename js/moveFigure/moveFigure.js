@@ -31,8 +31,8 @@ function checkingToMoveDown() {
 	return true;
 }
 
-function isExitFromFieldToDown(rowToCheck) { //is Outside Bottom border
-	const { matrix, size, row, column } = figure;
+export function isExitFromFieldToDown(rowToCheck) { //is Outside Bottom border
+	const { matrix, size } = figure;
 
 	for(let j = 0; j < size; j += 1) {
 		if(!matrix[rowToCheck][j]) continue;
@@ -81,7 +81,7 @@ function checkingToMoveLeft() {
 		if(isExitFromFieldToSide(columnToCheck)) return;
 	}
 
-	if(isOverlayingFiguresFromSide(-1)) return false;
+	if(isOverlayingFigures(-1)) return false;
 	return true;
 }
 
@@ -93,11 +93,11 @@ function checkingToMoveRight() {
 		if(isExitFromFieldToSide(columnToCheck)) return;
 	}
 
-	if(isOverlayingFiguresFromSide(1)) return;
+	if(isOverlayingFigures(1)) return;
 	return true;
 }
 
-function isExitFromFieldToSide(columnToCheck) {
+export function isExitFromFieldToSide(columnToCheck) {
 	const { matrix, size } = figure;
 
 	for(let i = 0; i < size; i += 1) {
@@ -106,7 +106,7 @@ function isExitFromFieldToSide(columnToCheck) {
 	}
 }
 
-function isOverlayingFiguresFromSide(offset) {
+export function isOverlayingFigures(offset) {
 	const { matrix, size, row, column } = figure;
 	
 	for(let i = 0; i < size; i += 1) {

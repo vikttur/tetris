@@ -7,9 +7,10 @@ export function deleteFigure(cells, figure) {
 		if(i + row < 0) continue;
 
 		for(let j = 0; j < size; j += 1) {
-			if(!matrix[i][j]) continue;
 			const cellIndex = elementIndex(row + i, column + j);
 			if(!isValidIndex(cellIndex)) continue;
+			if(!cells[cellIndex].hasAttribute('data-figure')) continue;
+			
 			cells[cellIndex].removeAttribute('class');
 			cells[cellIndex].removeAttribute('data-figure');
 		}
