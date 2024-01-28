@@ -1,10 +1,16 @@
 import { PLAYFIELD_COLUMNS, PLAYFIELD_ROWS } from '../constants.js';
 import { cells, figure, generateNewFigure } from '../main.js';
-import { elementIndex } from '../helpers/index.js';
 import { deleteFigure, deletingDateAttributes } from '../figure/index.js';
 import { searchForFilledRows, removingFilledRows } from '../removeFilledRows.js';
+import { isExitFromFieldToDown, isExitFromFieldToSide, isOverlayingFigures } from '../helpers/index.js';
 
 export let isThereMove = true;
+
+
+
+function gameOver() {
+  console.log('GAME OVER!!!');
+};
 
 // f-Down------------------------------------
 export function moveFigureDown() {
@@ -12,6 +18,12 @@ export function moveFigureDown() {
 		deletingDateAttributes(cells, figure);
 		WorkWithFilledRows();
 		generateNewFigure();
+
+		if(isOverlayingFigures(0, 0)) {
+			isThereMove = false;
+			gameOver(); 
+		}
+
 		return;
 	}
 
@@ -27,36 +39,10 @@ function checkingToMoveDown() {
 		if(isExitFromFieldToDown(rowToCheck)) return;
 	};
 
-	if(isOverlayingFiguresFromDown()) return;
+	if(isOverlayingFigures(1, 0)) return;
 	return true;
 }
 
-export function isExitFromFieldToDown(rowToCheck) { //is Outside Bottom border
-	const { matrix, size } = figure;
-
-	for(let j = 0; j < size; j += 1) {
-		if(!matrix[rowToCheck][j]) continue;
-		return true;	
-	}
-}
-
-function isOverlayingFiguresFromDown() {
-	const { matrix, size, row, column } = figure;
-	
-	for(let i = 0; i < size; i += 1) {
-		if(i + row < 0) continue;
-
-		for(let j = 0; j < size; j += 1){
-			if(!matrix[i][j]) continue;
-
-			const cellIndex = elementIndex(row + i + 1, column + j);
-			if(cells[cellIndex].hasAttribute('data-figure')) continue;
-			if(cells[cellIndex].hasAttribute('class')) return true;
-		}
-	}
-
-	return false;	
-}
 // f-Down------------------------------------
 // s-Left or Right------------------------------------
 export function moveFigureLeft() {
@@ -81,7 +67,7 @@ function checkingToMoveLeft() {
 		if(isExitFromFieldToSide(columnToCheck)) return;
 	}
 
-	if(isOverlayingFigures(-1)) return false;
+	if(isOverlayingFigures(0, -1)) return false;
 	return true;
 }
 
@@ -93,36 +79,10 @@ function checkingToMoveRight() {
 		if(isExitFromFieldToSide(columnToCheck)) return;
 	}
 
-	if(isOverlayingFigures(1)) return;
+	if(isOverlayingFigures(0, 1)) return;
 	return true;
 }
 
-export function isExitFromFieldToSide(columnToCheck) {
-	const { matrix, size } = figure;
-
-	for(let i = 0; i < size; i += 1) {
-		if(!matrix[i][columnToCheck]) continue;
-		return true;	
-	}
-}
-
-export function isOverlayingFigures(offset) {
-	const { matrix, size, row, column } = figure;
-	
-	for(let i = 0; i < size; i += 1) {
-		if(i + row < 0) continue;
-
-		for(let j = 0; j < size; j += 1) {
-			if(!matrix[i][j]) continue;
-			
-			const cellIndex = elementIndex(row + i, column + j + offset);
-			if(cells[cellIndex].hasAttribute('data-figure')) continue;
-			if(cells[cellIndex].hasAttribute('class')) return true;
-		}
-	}
-
-	return false;
-}
 // f-Left or Right------------------------------------
 // s-Down, Left or Right------------------------------------
 function permissionToMoveFigure(directionOfMove, displacementValue) {

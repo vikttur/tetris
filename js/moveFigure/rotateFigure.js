@@ -1,7 +1,6 @@
 import { PLAYFIELD_COLUMNS, PLAYFIELD_ROWS } from '../constants.js'
-import { randomValue, elementIndex } from '../helpers/index.js';
 import { deleteFigure } from '../figure/index.js';
-import { isExitFromFieldToDown, isExitFromFieldToSide, isOverlayingFigures } from './moveFigure.js';
+import { randomValue, isExitFromFieldToDown, isExitFromFieldToSide, isOverlayingFigures } from '../helpers/index.js';
 
 export function firstRotationOfMatrix(initialMatrix) {
 	const n = randomValue(0, 4);
@@ -77,7 +76,7 @@ function isPermissionToRotate(figure) {
 		}
 	}
 
-	if(isOverlayingFigures(0)) return;
+	if(isOverlayingFigures(0, 0)) return;
 
 	return true;
 }

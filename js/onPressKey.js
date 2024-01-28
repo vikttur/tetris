@@ -11,7 +11,7 @@ export  function onPressKay(e) {
 			break;
 		case 'arrowleft':
 			moveFigureLeft();
-			break;z
+			break;
 		case 'arrowright':
 			moveFigureRight();
 			break;

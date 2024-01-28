@@ -1,4 +1,4 @@
-import { PLAYFIELD_COLUMNS, PLAYFIELD_ROWS } from '../constants.js';
+import { PLAYFIELD_COLUMNS, PLAYFIELD_ROWS } from '/js/constants.js';
 
 export function elementIndex(row, column) {
 	return row * PLAYFIELD_COLUMNS + column;

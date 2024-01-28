@@ -30,7 +30,7 @@ export function removingFilledRows(array) {
 
 		for(let i = lastRow; i > 0; i -= 1) {
 			for(let j = 0; j < PLAYFIELD_COLUMNS; j += 1) {
-				const cellIndexUp = elementIndex(i - 1, j); // як бути з першим рядком?
+				const cellIndexUp = elementIndex(i - 1, j);
 				const cellIndexDown = elementIndex(i, j);
 
         cells[cellIndexDown].removeAttribute('class');
