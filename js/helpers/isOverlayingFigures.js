@@ -1,8 +1,7 @@
 import { cells, figure } from '/js/main.js';
 import { elementIndex } from './elementIndex.js';
 
-
-export function isOverlayingFigures(offsetRow, offsetColumn) {
+function isOverlayingFigures(offsetRow, offsetColumn) {
 	const { matrix, size, row, column } = figure;
 	
 	for(let i = 0; i < size; i += 1) {
@@ -18,4 +17,8 @@ export function isOverlayingFigures(offsetRow, offsetColumn) {
 	}
 
 	return false;
+}
+
+export {
+	isOverlayingFigures,
 }

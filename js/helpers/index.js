@@ -4,8 +4,6 @@ import { isExitFromFieldToDown, isExitFromFieldToSide } from './isExitFromField.
 import { isOverlayingFigures } from './/isOverlayingFigures.js';
 import { randomValue } from './randomValue.js';
 
-
-
 export {
   elementIndex,
   isValidIndex,

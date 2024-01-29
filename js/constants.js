@@ -1,7 +1,7 @@
-export const PLAYFIELD_COLUMNS = 10;
-export const PLAYFIELD_ROWS = 20;
+const PLAYFIELD_COLUMNS = 10;
+const PLAYFIELD_ROWS = 20;
 
-export const FIGURES = {
+const FIGURES = {
 	'O': [
 		[1, 1],
 		[1, 1],
@@ -38,3 +38,9 @@ export const FIGURES = {
 		[0, 1, 0, 0],
 	],
 };
+
+export {
+	PLAYFIELD_COLUMNS,
+	PLAYFIELD_ROWS,
+	FIGURES,
+}

@@ -1,8 +1,8 @@
 import { FIGURES } from '../constants.js';
 import { randomValue, initialRowOfFigure, initialColumnOfFigure } from '../helpers/index.js';
-import { firstRotationOfMatrix } from '../moveFigure/rotateFigure.js'
+import { firstRotationOfMatrix } from '../rotateFigure/rotateFigure.js'
 
-export function generateFigure(figureNames) { 
+function generateFigure(figureNames) { 
 	const figureNumber = randomValue(0, figureNames.length);
 	const name = figureNames[figureNumber];
 	const matrix = firstRotationOfMatrix(FIGURES[name]);
@@ -17,4 +17,8 @@ export function generateFigure(figureNames) {
 		row,
 		column,
 	}
+}
+
+export {
+	generateFigure,
 }

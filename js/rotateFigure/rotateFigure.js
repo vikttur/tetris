@@ -1,8 +1,8 @@
-import { PLAYFIELD_COLUMNS, PLAYFIELD_ROWS } from '../constants.js'
-import { deleteFigure } from '../figure/index.js';
+import { PLAYFIELD_COLUMNS, PLAYFIELD_ROWS } from '../constants.js';
 import { randomValue, isExitFromFieldToDown, isExitFromFieldToSide, isOverlayingFigures } from '../helpers/index.js';
+import { deleteFigure } from '../figure/index.js';
 
-export function firstRotationOfMatrix(initialMatrix) {
+function firstRotationOfMatrix(initialMatrix) {
 	const n = randomValue(0, 4);
 
 	for(let i = 0; i < n; i += 1) {
@@ -12,7 +12,7 @@ export function firstRotationOfMatrix(initialMatrix) {
 	return initialMatrix; 
 }
 
-export function rotateFigureRight(cells, figure) {
+function rotateFigureRight(cells, figure) {
 	const { matrix } = figure;
 	const oldMatrix = matrix;
 	const newMatrix = rotateMatrix(matrix);
@@ -27,7 +27,7 @@ export function rotateFigureRight(cells, figure) {
 	deleteFigure(cells, figure);
 }
 
-export function rotateFigureLeft(cells, figure) {
+function rotateFigureLeft(cells, figure) {
 	const { matrix } = figure;
 	const oldMatrix = matrix;
 	const newMatrix = rotateMatrix(matrix);
@@ -79,4 +79,10 @@ function isPermissionToRotate(figure) {
 	if(isOverlayingFigures(0, 0)) return;
 
 	return true;
+}
+
+export {
+	firstRotationOfMatrix,
+	rotateFigureRight,
+	rotateFigureLeft,
 }

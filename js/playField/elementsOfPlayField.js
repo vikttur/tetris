@@ -1,3 +1,7 @@
-export function elementsOfPlayField() {
+function elementsOfPlayField() {
   return document.querySelectorAll('.field li');
+}
+
+export {
+  elementsOfPlayField,
 }

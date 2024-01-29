@@ -1,6 +1,6 @@
 import { elementIndex, isValidIndex } from '../helpers/index.js';
 
-export function drawFigure(cells, figure) {
+function drawFigure(cells, figure) {
 	const { name, matrix, size, row, column } = figure;
 
 	for(let i = 0; i < size; i += 1) {
@@ -16,4 +16,8 @@ export function drawFigure(cells, figure) {
 			cells[cellIndex].setAttribute('data-figure', 'new');
 		}
 	}
+}
+
+export {
+	drawFigure,
 }

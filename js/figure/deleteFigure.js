@@ -1,6 +1,6 @@
 import { elementIndex, isValidIndex } from '../helpers/index.js';
 
-export function deleteFigure(cells, figure) {
+function deleteFigure(cells, figure) {
 	const { matrix, size, row, column } = figure;
 
 	for(let i = 0; i < size; i += 1) {
@@ -15,4 +15,8 @@ export function deleteFigure(cells, figure) {
 			cells[cellIndex].removeAttribute('data-figure');
 		}
 	}
+}
+
+export {
+	deleteFigure,
 }

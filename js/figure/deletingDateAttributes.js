@@ -1,7 +1,6 @@
-
 import { elementIndex, isValidIndex } from '../helpers/index.js';
 
-export function deletingDateAttributes(cells, figure) {
+function deletingDateAttributes(cells, figure) {
 	const { size, row, column } = figure;
 
 	for(let i = 0; i < size; i += 1) {
@@ -11,4 +10,8 @@ export function deletingDateAttributes(cells, figure) {
 			cells[cellIndex].removeAttribute('data-figure');
 		}
 	}
+}
+
+export  {
+	deletingDateAttributes,
 }

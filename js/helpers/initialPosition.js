@@ -1,6 +1,6 @@
-import { PLAYFIELD_COLUMNS } from '../constants.js';
+import { PLAYFIELD_COLUMNS } from '/js/constants.js';
 
-export function initialRowOfFigure(matrix, size) {
+function initialRowOfFigure(matrix, size) {
 	let row = 1;
 
 	for(let i = size - 1; i > 0; i -= 1) {
@@ -12,7 +12,7 @@ export function initialRowOfFigure(matrix, size) {
 	}
 }
 
-export function initialColumnOfFigure(matrix) {
+function initialColumnOfFigure(matrix) {
 	const adjustment = columnAdjustment(matrix);
 	return Math.floor((PLAYFIELD_COLUMNS - matrix.length) / 2) + adjustment;
 }
@@ -25,4 +25,9 @@ function columnAdjustment(matrix) {
 	}
 
 	return 1;
+}
+
+export {
+	initialRowOfFigure,
+	initialColumnOfFigure
 }
