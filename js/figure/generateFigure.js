@@ -1,6 +1,6 @@
 import { FIGURES } from '../constants.js';
 import { randomValue, initialRowOfFigure, initialColumnOfFigure } from '../helpers/index.js';
-import { firstRotationOfMatrix } from '../rotateFigure/rotateFigure.js'
+import { firstRotationOfMatrix } from '../rotateFigure/firstRotationOfMatrix.js';
 
 function generateFigure(figureNames) { 
 	const figureNumber = randomValue(0, figureNames.length);

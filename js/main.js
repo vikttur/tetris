@@ -3,7 +3,7 @@ import { generatePlayField, elementsOfPlayField } from './playField/index.js';
 import { generateFigure, drawFigure } from './figure/index.js';
 
 import { moveFigureDown, moveFigureLeft, moveFigureRight } from './moveFigure/index.js';
-import { rotateFigureRight, rotateFigureLeft } from './rotateFigure/index.js';
+import { rotateFigure } from './rotateFigure/index.js';
 
 generatePlayField();
 const cells = elementsOfPlayField();
@@ -36,10 +36,10 @@ function onPressKay(e) {
 			moveFigureRight();
 			break;
 		case 'arrowup':
-			rotateFigureRight(cells, figure);
+			rotateFigure(cells, figure, 'right');
 			break;	
 		case 'z':
-			rotateFigureLeft(cells, figure);
+			rotateFigure(cells, figure, 'left');
 			break;
 	}
 
