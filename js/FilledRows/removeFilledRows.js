@@ -4,7 +4,7 @@ import { cells } from '../main.js';
 
 function removeFilledRows(array) {
 	for(let n = 0; n < array.length; n += 1) {
-		const lastRow = array;
+		const lastRow = array[array.length - 1];
 
 		for(let i = lastRow; i > 0; i -= 1) {
 			for(let j = 0; j < PLAYFIELD_COLUMNS; j += 1) {

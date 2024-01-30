@@ -19,12 +19,12 @@ function moveFigureDown() {
 }
 
 function stopMotionFigure(){
-	WorkWithFilledRows();
+	FindAndDeleteFilledRows();
 	newFigure();
 	if(isOverlayingFigures(0, 0)) gameOver(); 
 }
 
-function WorkWithFilledRows() {
+function FindAndDeleteFilledRows() {
 	const arrayOfFilledRows  = searchForFilledRows();
 	if(arrayOfFilledRows.length) removeFilledRows(arrayOfFilledRows);
 }
