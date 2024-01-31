@@ -1,6 +1,7 @@
 import { elementIndex, isValidIndex } from '../helpers/index.js';
+import { cells, figure } from '../main.js';
 
-function drawFigure(cells, figure) {
+function drawFigure() {
 	const { name, matrix, size, row, column } = figure;
 
 	for(let i = 0; i < size; i += 1) {
