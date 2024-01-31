@@ -18,6 +18,11 @@ ul {
 	list-style: none;
 }
 
+.balls {
+	width: 100px;
+	font-size: 40px;
+}
+
 .field{
 	display: grid;
 	grid-template-columns: repeat(10, auto);

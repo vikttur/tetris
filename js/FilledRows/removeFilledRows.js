@@ -1,6 +1,7 @@
 import { PLAYFIELD_COLUMNS } from '../constants.js';
 import { elementIndex } from '../helpers/index.js';
 import { cells } from '../main.js';
+import { pointsForFilledLines } from '../calculationOfPoints/index.js';
 
 function removeFilledRows(array) {
 	for(let n = 0; n < array.length; n += 1) {
@@ -17,6 +18,8 @@ function removeFilledRows(array) {
 			}
 		}
 	}
+
+	pointsForFilledLines(array.length);
 }
 
 export {

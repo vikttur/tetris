@@ -3,6 +3,7 @@ import { cells, figure, permissionToMoveFigure, generateNewFigure  } from '../ma
 import { deleteFigure, deletingDateAttributes } from '../figure/index.js';
 import { searchForFilledRows, removeFilledRows } from '../FilledRows/index.js';
 import { checkingToMoveDown }  from './checkingMoveFigure.js';
+import { pointsForFigures } from '../calculationOfPoints/index.js';
 
 function gameOver() {
 	permissionToMoveFigure(false);
@@ -12,6 +13,7 @@ function gameOver() {
 function moveFigureDown() {
 	if(!checkingToMoveDown()) {
 		stopMotionFigure();
+		pointsForFigures();
 		return;
 	}
 
@@ -21,7 +23,7 @@ function moveFigureDown() {
 function stopMotionFigure(){
 	FindAndDeleteFilledRows();
 	newFigure();
-	if(isOverlayingFigures(0, 0)) gameOver(); 
+	if(isOverlayingFigures(0, 0)) gameOver();
 }
 
 function FindAndDeleteFilledRows() {
