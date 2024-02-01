@@ -12,17 +12,16 @@ let figure = generateFigure(figureNames);
  
 let isThereMove = true;
 let timeoutId = 0;
-let reqestId = 0;
+let reqestId;
 let count = 0;
 
 function startLoop() {
 	timeoutId = setTimeout(() => (reqestId = requestAnimationFrame(loopStep)), 700);
-	
 	count++;
 	
 	if(count === 100) {
 		stopLoop(); 
-		console.log(555); 
+		console.log('stop'); 
 	}
 }
 
@@ -41,7 +40,7 @@ function stopLoop() {
 
 drawFigure();
 
-// startLoop();
+startLoop();
 
 function generateNewFigure() {
   figure = generateFigure(figureNames);
@@ -51,10 +50,22 @@ function permissionToMoveFigure(bool) {
 	isThereMove = bool;
 }
 
+let isNotPause = true;
+
+function togglePauseInGame() {
+	isNotPause = !isNotPause;
+	isNotPause ? startLoop() : stopLoop();
+}
+
 document.addEventListener('keydown', onPressKay);
 
 function onPressKay(e) {
-	switch(e.key.toLowerCase()){
+	const eKey = e.key.toLowerCase();
+
+	if(eKey === 'escape')	togglePauseInGame();
+	if(!isNotPause) return;
+
+	switch(eKey) {
 		case 'arrowdown':
 			moveFigureDown();
 			break;
@@ -69,9 +80,6 @@ function onPressKay(e) {
 			break;	
 		case 'z':
 			rotateFigure(cells, figure, 'left');
-			break;
-		case 'escape':
-			stopLoop();
 			break;
 	}
 
