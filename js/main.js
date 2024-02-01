@@ -1,6 +1,7 @@
 import { FIGURES } from '/js/constants.js';
 import { generatePlayField, elementsOfPlayField } from './playField/index.js';
 import { generateFigure, drawFigure } from './figure/index.js';
+import { startLoopTimer, stopLoopTimer } from './loopTimer/index.js';
 import { moveFigureDown, hardDropOfFigure, moveFigureLeft, moveFigureRight } from './moveFigure/index.js';
 import { rotateFigure } from './rotateFigure/index.js';
 
@@ -12,36 +13,7 @@ let figure = generateFigure(figureNames);
  
 let isThereMove = true;
 let isNotPause = true;
-let timeoutId = 0;
-let reqestId;
-let count = 0;
-// ==============================
-function startLoop() {
-	timeoutId = setTimeout(() => (reqestId = requestAnimationFrame(loopStep)), 700);
-	count++;
-	
-	if(count === 100) {
-		stopLoop(); 
-		console.log('stop'); 
-	}
-}
 
-function loopStep() {
-	console.log(timeoutId); 
-	moveFigureDown();
-	drawFigure();
-
-	stopLoop(); 
-	// console.log(timeoutId); 
-	startLoop();
-	// console.log(timeoutId); 
-}
-
-function stopLoop() {
-	cancelAnimationFrame(reqestId);
-	timeoutId = clearTimeout(timeoutId);
-}
-// ==============================
 // drawFigure();
 
 function generateNewFigure() {
@@ -54,7 +26,7 @@ function permissionToMoveFigure(bool) {
 
 function togglePauseInGame() {
 	isNotPause = !isNotPause;
-	isNotPause ? startLoop() : stopLoop();
+	isNotPause ? startLoopTimer() : stopLoopTimer();
 }
 
 document.addEventListener('keydown', onPressKay);
@@ -67,7 +39,7 @@ function onPressKay(e) {
 
 	switch(eKey) {
 		case 's':
-			startLoop();
+			startLoopTimer();
 			break;
 		case 'arrowdown':
 			moveFigureDown();
@@ -97,5 +69,4 @@ export {
 	figure,
 	generateNewFigure,
 	permissionToMoveFigure,
-	onPressKay,
 }
