@@ -12,10 +12,10 @@ function pointsForFilledLines(numberOfLines) {
     points = 300;
     break;
   case 3:
-    points = 500;
+    points = 700;
     break;
   case 4:
-    points = 800;
+    points = 1500;
     break;
   }
 

@@ -5,16 +5,17 @@ let timerId = 0;
 let interval = 700;
 
 function startLoopTimer() {
+	if(timerId) return;
 	timerId = setInterval(loopStep, interval);
 }
 
 function loopStep() {
-	moveFigureDown();
+	moveFigureDown(false);
 	drawFigure();
 }
 
 function stopLoopTimer() {
-	clearInterval(timerId);
+	timerId = clearInterval(timerId);
 }
 
 export {

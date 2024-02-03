@@ -3,20 +3,21 @@ import { cells, figure, permissionToMoveFigure, generateNewFigure  } from '../ma
 import { deleteFigure, deletingDateAttributes } from '../figure/index.js';
 import { searchForFilledRows, removeFilledRows } from '../FilledRows/index.js';
 import { checkingToMoveDown }  from './checkingMoveFigure.js';
-import { pointsForFigures } from '../calculationOfPoints/index.js';
+import { pointsForFigures, pointsForDrop } from '../calculationOfPoints/index.js';
 
 function gameOver() {
 	permissionToMoveFigure(false);
   console.log('GAME OVER!!!');
 };
 
-function moveFigureDown() {
+function moveFigureDown(bool) {
 	if(!checkingToMoveDown()) {
 		stopMotionFigure();
 		pointsForFigures();
 		return;
 	}
 
+	if(bool) pointsForDrop();
 	moveFigure(1);
 }
 

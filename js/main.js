@@ -42,7 +42,7 @@ function onPressKay(e) {
 			startLoopTimer();
 			break;
 		case 'arrowdown':
-			moveFigureDown();
+			moveFigureDown(true);
 			break;
 		case ' ':
 			hardDropOfFigure();
