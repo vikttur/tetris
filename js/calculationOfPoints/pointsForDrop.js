@@ -1,18 +1,12 @@
-import { PLAYFIELD_ROWS } from '../constants.js';
-import { figure } from '../main.js';
 import { calculationOfPoints } from './calculationOfPoints.js';
 
 function pointsForDrop() {
   calculationOfPoints(1);
 }
 
-function pointsForHardDrop() {
-  const points = rowsCalculation();
+function pointsForHardDrop(steps) {
+  const points = steps * 2;
   calculationOfPoints(points);
-}
-
-function  rowsCalculation() {
-  return PLAYFIELD_ROWS - figure.row;
 }
 
 export {

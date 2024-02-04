@@ -35,7 +35,7 @@ function onPressKay(e) {
 	const eKey = e.key.toLowerCase();
 
 	if(eKey === 'escape')	togglePauseInGame();
-	if(!isNotPause) return;
+	// if(!isNotPause) return;
 
 	switch(eKey) {
 		case 's':

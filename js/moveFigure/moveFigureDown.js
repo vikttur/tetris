@@ -10,14 +10,14 @@ function gameOver() {
   console.log('GAME OVER!!!');
 };
 
-function moveFigureDown(bool) {
+function moveFigureDown(isCalc) {
 	if(!checkingToMoveDown()) {
 		stopMotionFigure();
 		pointsForFigures();
 		return;
 	}
 
-	if(bool) pointsForDrop();
+	if(isCalc) pointsForDrop();
 	moveFigure(1);
 }
 

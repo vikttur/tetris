@@ -3,11 +3,18 @@ import { checkingToMoveDown }  from './checkingMoveFigure.js';
 import { pointsForHardDrop } from '../calculationOfPoints/index.js';
 
 function hardDropOfFigure() {
-	pointsForHardDrop();
+	pointsForHardDrop(dropCycle());
+}
+
+function dropCycle() {
+	let steps = 0;
 
 	while(checkingToMoveDown()) {
-		moveFigureDown();
+		moveFigureDown(false);
+		steps += 1;
 	}
+
+	return steps;
 }
 
 export {
