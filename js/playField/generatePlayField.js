@@ -19,7 +19,7 @@ function createFieldElements(field) {
 }
 
 function addPlayFieldInDOM(field) {
-	document.querySelector('.tetris').append(field);
+	document.querySelector('.playfield').append(field);
 };
 
 export {

@@ -5,6 +5,18 @@ import { startLoopTimer, stopLoopTimer } from './loopTimer/index.js';
 import { moveFigureDown, hardDropOfFigure, moveFigureLeft, moveFigureRight } from './moveFigure/index.js';
 import { rotateFigure } from './rotateFigure/index.js';
 
+function plug() {
+
+}
+
+function rotateFigureLeft() {
+	rotateFigure(cells, figure, 'left');
+}
+
+function rotateFigureRight() {
+	rotateFigure(cells, figure, 'right');
+}
+
 generatePlayField();
 const cells = elementsOfPlayField();
  
@@ -28,6 +40,30 @@ function togglePauseInGame() {
 	isNotPause = !isNotPause;
 	isNotPause ? startLoopTimer() : stopLoopTimer();
 }
+
+const ref = {
+	newBtn: document.querySelector("[data-new]"),
+	stopBtn: document.querySelector("[data-stop]"),
+	pauseBtn: document.querySelector("[data-pause]"),
+	restartBtn: document.querySelector("[data-restart]"),
+	rotateLeftBtn: document.querySelector("[data-rotate-left]"),
+	rotateRightBtn: document.querySelector("[data-rotate-right]"),	
+	leftBtn: document.querySelector("[data-left]"),
+	rightBtn: document.querySelector("[data-right]"),
+	downBtn: document.querySelector("[data-down]"),
+	hardDropBtn: document.querySelector("[data-hard-drop]"),
+};
+
+ref.newBtn.addEventListener("click", startLoopTimer);
+ref.stopBtn.addEventListener("click", plug);
+ref.pauseBtn.addEventListener("click", togglePauseInGame);
+ref.restartBtn.addEventListener("click", plug);
+ref.rotateLeftBtn.addEventListener("click", rotateFigureLeft);
+ref.rotateRightBtn.addEventListener("click", rotateFigureRight);
+ref.leftBtn.addEventListener("click", moveFigureLeft);
+ref.rightBtn.addEventListener("click", moveFigureRight);
+ref.downBtn.addEventListener("click", moveFigureDown);
+ref.hardDropBtn.addEventListener("click", hardDropOfFigure);
 
 document.addEventListener('keydown', onPressKay);
 
@@ -54,10 +90,10 @@ function onPressKay(e) {
 			moveFigureRight();
 			break;
 		case 'arrowup':
-			rotateFigure(cells, figure, 'right');
+			rotateFigureRight;
 			break;	
 		case 'z':
-			rotateFigure(cells, figure, 'left');
+			rotateFigureLeft;
 			break;
 	}
 

@@ -1,7 +1,7 @@
 import { isOverlayingFigures } from '../helpers/index.js';
 import { cells, figure, permissionToMoveFigure, generateNewFigure  } from '../main.js';
 import { deleteFigure, deletingDateAttributes } from '../figure/index.js';
-import { searchForFilledRows, removeFilledRows } from '../FilledRows/index.js';
+import { searchForFilledRows, removeFilledRows } from '../filledRows/index.js';
 import { checkingToMoveDown }  from './checkingMoveFigure.js';
 import { pointsForFigures, pointsForDrop } from '../calculationOfPoints/index.js';
 

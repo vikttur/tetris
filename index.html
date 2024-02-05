@@ -7,9 +7,38 @@
 	<link rel="stylesheet" href="./style/style.css">
 </head>
 <body>
-	<section class="balls">0</section>
-	<section class="tetris"></section>
+	<header class="balls">0</header>
 
+	<section class="tetris">
+		<div class="calculation"></div>
+		<div class="playfield"></div>
+		<div class="control-panel">
+			<div class="general-control">
+				<button type="button" class="btn" data-new>New Game</button>
+				<button type="button" class="btn" data-stop>Stop</button>
+				<button type="button" class="btn" data-pause>Pause</button>
+				<button type="button" class="btn" data-restart>Restart</button>
+			</div>
+
+			<div class="game-control">
+				<div class="other-control">
+					<button type="button" class="btn" data-rotate-left>RL</button>
+					<button type="button" class="btn" data-hard-drop>Drop</button>
+				</div>
+
+				<div class="main-control">
+					<button type="button" class="btn" data-rotate-right>RR</button>
+					<button type="button" class="btn" data-left>Left</button>
+					<button type="button" class="btn" data-right>Right</button>
+					<button type="button" class="btn" data-down>Down</button>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<footer>
+
+	</footer>
 	<script type="module" src="./js/main.js"></script>
 </body>
 </html>
