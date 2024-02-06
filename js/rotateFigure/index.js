@@ -1,11 +1,12 @@
 import { firstRotationOfMatrix }  from './firstRotationOfMatrix.js';
 import { isPermissionToRotate }  from './isPermissionToRotate.js';
-import { rotateFigure }  from './rotateFigure.js';
+import { rotateFigureLeft, rotateFigureRight }  from './rotateFigure.js';
 import { rotateMatrix }  from './rotateMatrix.js';
 
 export {
   firstRotationOfMatrix,
   isPermissionToRotate,
-  rotateFigure,
+  rotateFigureLeft,
+  rotateFigureRight,
   rotateMatrix,
 }

@@ -3,19 +3,7 @@ import { generatePlayField, elementsOfPlayField } from './playField/index.js';
 import { generateFigure, drawFigure } from './figure/index.js';
 import { startLoopTimer, stopLoopTimer } from './loopTimer/index.js';
 import { moveFigureDown, hardDropOfFigure, moveFigureLeft, moveFigureRight } from './moveFigure/index.js';
-import { rotateFigure } from './rotateFigure/index.js';
-
-function plug() {
-
-}
-
-function rotateFigureLeft() {
-	rotateFigure(cells, figure, 'left');
-}
-
-function rotateFigureRight() {
-	rotateFigure(cells, figure, 'right');
-}
+import { rotateFigureLeft, rotateFigureRight } from './rotateFigure/index.js';
 
 generatePlayField();
 const cells = elementsOfPlayField();
@@ -25,6 +13,7 @@ let figure = generateFigure(figureNames);
  
 let isThereMove = true;
 let isNotPause = true;
+let currentScore = 0;
 
 // drawFigure();
 
@@ -34,6 +23,10 @@ function generateNewFigure() {
 
 function permissionToMoveFigure(bool) {
 	isThereMove = bool;
+}
+
+function savePoints(points) {
+	currentScore = points;
 }
 
 function togglePauseInGame() {
@@ -55,9 +48,9 @@ const ref = {
 };
 
 ref.newBtn.addEventListener("click", startLoopTimer);
-ref.stopBtn.addEventListener("click", plug);
+// ref.stopBtn.addEventListener("click", plug);
 ref.pauseBtn.addEventListener("click", togglePauseInGame);
-ref.restartBtn.addEventListener("click", plug);
+// ref.restartBtn.addEventListener("click", plug);
 ref.rotateLeftBtn.addEventListener("click", rotateFigureLeft);
 ref.rotateRightBtn.addEventListener("click", rotateFigureRight);
 ref.leftBtn.addEventListener("click", moveFigureLeft);
@@ -90,10 +83,10 @@ function onPressKay(e) {
 			moveFigureRight();
 			break;
 		case 'arrowup':
-			rotateFigureRight;
+			rotateFigureRight();
 			break;	
 		case 'z':
-			rotateFigureLeft;
+			rotateFigureLeft();
 			break;
 	}
 
@@ -103,6 +96,8 @@ function onPressKay(e) {
 export {
 	cells,
 	figure,
+	currentScore,
 	generateNewFigure,
 	permissionToMoveFigure,
+	savePoints,
 }
