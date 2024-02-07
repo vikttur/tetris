@@ -39,8 +39,16 @@ const FIGURES = {
 	],
 };
 
+const POINTS_FOR_LINES = {
+  '1': 100,
+  '2': 300,
+  '3': 500,
+  '4': 800,
+};
+
 export {
 	PLAYFIELD_COLUMNS,
 	PLAYFIELD_ROWS,
 	FIGURES,
+	POINTS_FOR_LINES,
 }
