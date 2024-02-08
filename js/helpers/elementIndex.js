@@ -1,7 +1,11 @@
-import { PLAYFIELD_COLUMNS, PLAYFIELD_ROWS } from '/js/constants.js';
+import { PLAYFIELD_COLUMNS, PLAYFIELD_ROWS, NEXT_FIELD_COLUMNS } from '/js/constants.js';
 
 function elementIndex(row, column) {
 	return row * PLAYFIELD_COLUMNS + column;
+}
+
+function indexOfNextElement(row, column) {
+	return row * NEXT_FIELD_COLUMNS + column;
 }
 
 function isValidIndex(cellIndex) {
@@ -12,5 +16,6 @@ function isValidIndex(cellIndex) {
 
 export {
 	elementIndex,
+	indexOfNextElement,
 	isValidIndex,
 }

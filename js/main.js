@@ -1,15 +1,17 @@
 import { FIGURES } from '/js/constants.js';
-import { generatePlayField, elementsOfPlayField } from './playField/index.js';
+import { generatePlayField, generateFieldNextFigure, elementsOfPlayField } from './playField/index.js';
 import { generateFigure, drawFigure } from './figure/index.js';
 import { startLoopTimer, stopLoopTimer } from './loopTimer/index.js';
 import { moveFigureDown, hardDropOfFigure, moveFigureLeft, moveFigureRight } from './moveFigure/index.js';
 import { rotateFigureLeft, rotateFigureRight } from './rotateFigure/index.js';
 
 generatePlayField();
-const cells = elementsOfPlayField();
+const cells = elementsOfPlayField('.field li');
+generateFieldNextFigure();
+const cellsNext = elementsOfPlayField('.field-next li');
  
 const figureNames = Object.keys(FIGURES);
-let figure = generateFigure(figureNames);
+let figure = generateFigure();
  
 let isThereMove = true;
 let isNotPause = true;
@@ -18,7 +20,7 @@ let currentScore = 0;
 // drawFigure();
 
 function generateNewFigure() {
-  figure = generateFigure(figureNames);
+  figure = generateFigure();
 }  
 
 function permissionToMoveFigure(bool) {
@@ -94,7 +96,9 @@ function onPressKay(e) {
 }
 
 export {
+	figureNames,
 	cells,
+	cellsNext,
 	figure,
 	currentScore,
 	generateNewFigure,

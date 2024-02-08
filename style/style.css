@@ -120,8 +120,26 @@ ul {
 	grid-template-columns: repeat(10, auto);
 	grid-template-rows: repeat(20, auto) ;
 	background-color:  rgba(56, 65, 66, 0.138);
-	padding: 0.5hv;
-	border-radius: 0.5vh;
+	padding: 2px;
+	border-radius: 2px;
+}
+
+.field-next {
+	display: flex;
+	flex-wrap: wrap;
+
+	width: 80px;
+	gap:5;
+	background-color:  rgba(56, 65, 66, 0.138);
+	
+	
+}
+
+.field-next li {
+	width: 20px;
+	height: 20px;
+	/* background-color: rgba(98, 98, 155, 0.611); */
+	border-radius: 1px;
 }
 
 .field li {
@@ -133,35 +151,40 @@ ul {
 							inset -4px -4px 8px rgb(116, 43, 207, 0.2); */
 }
 
-.field .O {
+.field .O,
+.field-next .O {
 	background-color: rgb(255, 255, 0);
 	box-shadow: inset -8px 8px 15px rgba(160, 160, 160, 0.5); 
 	/* box-shadow: inset -4px -4px 0px rgba(210, 210, 0, 0.2),
 							inset 4px 4px 0px rgba(210, 210, 0, 0.2);		 */
 }
 
-.field .T {
+.field .T,
+.field-next .T {
 	background-color: rgb(195, 0, 255);
 	box-shadow: inset -8px 8px 15px rgba(255, 255, 255, 0.5); 
 	/* box-shadow: inset -4px -4px 0px rgba(155, 0, 210, 0.2),
 							inset 4px 4px 0px rgba(155, 0, 210, 0.2);	 */
 }
 
-.field .L {
+.field .L,
+.field-next .L {
 	background-color: rgb(206, 159, 29);
 	box-shadow: inset -8px 8px 15px rgba(255, 255, 255, 0.5); 
 	/* box-shadow: inset -4px -4px 0px rgba(166, 119, 0, 0.2),
 							inset 4px 4px 0px rgba(166, 119, 0, 0.2);	 */
 }
 
-.field .Lr {
+.field .Lr,
+.field-next .Lr {
 	background-color: rgb(0, 0, 255);
 	box-shadow: inset -8px 8px 15px rgba(255, 255, 255, 0.5); 
 	/* box-shadow: inset -4px -4px 0px rgba(0, 0, 210, 0.2),
 							inset 4px 4px 0px rgba(0, 0, 210, 0.2);		 */
 }
 
-.field .S {
+.field .S,
+.field-next .S {
 	background-color: rgb(0, 255, 0);
 	box-shadow: inset -8px 8px 15px rgba(160, 160, 160, 0.5); 
            /* inset 10px 10px 15px rgba(70, 70, 70, 0.12); */
@@ -169,14 +192,16 @@ ul {
 							inset 4px 4px 0px rgba(0, 210, 0, 0.2);		 */
 }
 
-.field .Sr {
+.field .Sr,
+.field-next .Sr {
 	background-color: rgb(255, 0, 0);
 	box-shadow: inset -8px 8px 15px rgba(255, 255, 255, 0.5); 
 	/* box-shadow: inset -4px -4px 0px rgba(210, 0, 0, 0.2),
 							inset 4px 4px 0px rgba(210, 0, 0, 0.2); */
 }
 
-.field .I {
+.field .I,
+.field-next .I {
 	background-color: rgb(0, 225, 255);
 	box-shadow: inset -8px 8px 15px rgba(160, 160, 160, 0.5);  
 	/* box-shadow: inset -4px -4px 0px rgba(0, 210, 210, 0.2),

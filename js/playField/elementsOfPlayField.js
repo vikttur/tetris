@@ -1,5 +1,5 @@
-function elementsOfPlayField() {
-  return document.querySelectorAll('.field li');
+function elementsOfPlayField(elementClass) {
+  return document.querySelectorAll(elementClass);
 }
 
 export {
