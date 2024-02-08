@@ -127,17 +127,16 @@ ul {
 .field-next {
 	display: flex;
 	flex-wrap: wrap;
+	justify-content: center;
 
 	width: 80px;
 	gap:5;
 	background-color:  rgba(56, 65, 66, 0.138);
-	
-	
 }
 
 .field-next li {
-	width: 20px;
-	height: 20px;
+	width: 18px;
+	height: 18px;
 	/* background-color: rgba(98, 98, 155, 0.611); */
 	border-radius: 1px;
 }

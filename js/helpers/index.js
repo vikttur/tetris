@@ -2,6 +2,7 @@ import { elementIndex, indexOfNextElement, isValidIndex } from './elementIndex.j
 import { initialRowOfFigure, initialColumnOfFigure } from './initialPosition.js';
 import { isExitFromFieldToDown, isExitFromFieldToSide } from './isExitFromField.js';
 import { isOverlayingFigures } from './/isOverlayingFigures.js';
+import { nameFigure } from './nameFigure.js';
 import { randomValue } from './randomValue.js';
 
 export {
@@ -13,5 +14,6 @@ export {
   isExitFromFieldToDown,
   isExitFromFieldToSide,
   isOverlayingFigures,
+  nameFigure,
   randomValue,
 }

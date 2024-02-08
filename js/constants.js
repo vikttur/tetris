@@ -1,7 +1,7 @@
 const PLAYFIELD_COLUMNS = 10;
 const PLAYFIELD_ROWS = 20;
 const NEXT_FIELD_COLUMNS = 4;
-const NEXT_FIELD_ROWS = 4;
+const NEXT_FIELD_ROWS = 2;
 
 const FIGURES = {
 	'O': [
