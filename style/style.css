@@ -23,16 +23,30 @@ ul {
 }
 
 .result {
+	display: flex;
+	flex-direction: column;
 	width: 200px;
 	padding: 10px;
+	gap: 20px;
 	font-weight: bold;
 	font-size: 30px;
 	border: 1px solid red;
 }
 
-/* .calculation {
-	width: 40px;
-} */
+.calculation {
+	display: flex;
+}
+
+.name-score {
+	display: block;
+	width: 140px;
+}
+
+.value-score {
+	display: block;
+}
+
+
 
 
 .control-panel {
