@@ -3,7 +3,16 @@ import { currentScore } from './main.js';
 let key = 'hightScore';
 
 function startSetLocalStorage( key, value) {
-  if(!localStorage.getItem (key)) localStorage.setItem( key, value);
+  if(!localStorage.getItem (key)) {
+    localStorage.setItem( key, value);
+    return;
+  }
+
+  displayOfhightScore();
+}
+
+function displayOfhightScore() {
+  document.querySelector('.hight-score').innerHTML = localStorage.getItem (key);
 }
 
 function setLocalStorage( key, value) {

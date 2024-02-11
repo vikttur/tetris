@@ -16,6 +16,8 @@ let figure = generateFigure();
 let isThereMove = true;
 let isNotPause = true;
 let currentScore = 0;
+let quantityFigure = 0;
+let quantityLines = 0;
 
 // drawFigure();
 
@@ -30,6 +32,16 @@ function permissionToMoveFigure(bool) {
 function savePoints(points) {
 	currentScore = points;
 }
+
+function saveQuantityFigure(points) {
+	quantityFigure = points;
+}
+
+function saveQuantityLines(points) {
+	quantityLines = points;
+}
+
+quantityLines, saveQuantityLines
 
 function togglePauseInGame() {
 	isNotPause = !isNotPause;
@@ -104,4 +116,8 @@ export {
 	generateNewFigure,
 	permissionToMoveFigure,
 	savePoints,
+	quantityFigure,
+	saveQuantityFigure,
+	quantityLines,
+	saveQuantityLines,
 }
