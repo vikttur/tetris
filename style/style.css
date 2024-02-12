@@ -51,7 +51,9 @@ ul {
 	justify-content: center;
 }
 
-
+.playfield {
+	position:relative;
+}
 
 
 .control-panel {
@@ -156,13 +158,16 @@ ul {
 	flex-wrap: wrap;
 	justify-content: center;
 
-	width: 80px;
-	border: 1px solid red;
+	position: absolute;
+	top: -34px;
+	left: 40px;
+
+	width: 70px;
 }
 
 .field-next li {
-	width: 18px;
-	height: 18px;
+	width: 16px;
+	height: 16px;
 	/* background-color: rgba(98, 98, 155, 0.611); */
 	border-radius: 1px;
 }
