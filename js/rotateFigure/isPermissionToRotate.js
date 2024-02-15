@@ -1,4 +1,4 @@
-import { PLAYFIELD_COLUMNS, PLAYFIELD_ROWS } from '../constants.js';
+import { PLAYFIELD_COLUMNS, PLAYFIELD_ROWS } from '../constants/constants.js';
 import { isExitFromFieldToDown, isExitFromFieldToSide, isOverlayingFigures } from '../helpers/index.js';
 
 function isPermissionToRotate(figure) {

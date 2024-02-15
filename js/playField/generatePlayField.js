@@ -1,4 +1,4 @@
-import { 	PLAYFIELD_COLUMNS, PLAYFIELD_ROWS } from '../constants.js';
+import { 	PLAYFIELD_COLUMNS, PLAYFIELD_ROWS } from '../constants/constants.js';
 import { createField, createFieldElements, addPlayFieldInDOM } from './createField.js';
 
 function generatePlayField() {

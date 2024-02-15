@@ -1,4 +1,4 @@
-import { POINTS_FOR_LINES } from '../constants.js';
+import { POINTS_FOR_LINES } from '../constants/constants.js';
 import { quantityLines, saveQuantityLines } from '../main.js';
 import { calculationOfPoints } from './calculationOfPoints.js';
 

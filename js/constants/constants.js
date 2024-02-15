@@ -3,6 +3,13 @@ const PLAYFIELD_ROWS = 20;
 const NEXT_FIELD_COLUMNS = 4;
 const NEXT_FIELD_ROWS = 2;
 
+const POINTS_FOR_LINES = {
+  '1': 100,
+  '2': 300,
+  '3': 500,
+  '4': 800,
+};
+
 const FIGURES = {
 	'O': [
 		[1, 1],
@@ -41,18 +48,11 @@ const FIGURES = {
 	],
 };
 
-const POINTS_FOR_LINES = {
-  '1': 100,
-  '2': 300,
-  '3': 500,
-  '4': 800,
-};
-
 export {
 	PLAYFIELD_COLUMNS,
 	PLAYFIELD_ROWS,
 	NEXT_FIELD_COLUMNS,
 	NEXT_FIELD_ROWS,
-	FIGURES,
 	POINTS_FOR_LINES,
+	FIGURES,
 }

@@ -12,12 +12,6 @@ const cellsNext = elementsOfPlayField('.field-next li');
  
 const figureNames = Object.keys(FIGURES);
 let figure = generateFigure();
- 
-let isThereMove = true;
-let isNotPause = true;
-let currentScore = 0;
-let quantityFigure = 0;
-let quantityLines = 0;
 
 // drawFigure();
 
@@ -50,9 +44,7 @@ function togglePauseInGame() {
 
 const ref = {
 	newBtn: document.querySelector("[data-new]"),
-	stopBtn: document.querySelector("[data-stop]"),
 	pauseBtn: document.querySelector("[data-pause]"),
-	restartBtn: document.querySelector("[data-restart]"),
 	rotateLeftBtn: document.querySelector("[data-rotate-left]"),
 	rotateRightBtn: document.querySelector("[data-rotate-right]"),	
 	leftBtn: document.querySelector("[data-left]"),
@@ -62,9 +54,7 @@ const ref = {
 };
 
 ref.newBtn.addEventListener("click", startLoopTimer);
-// ref.stopBtn.addEventListener("click", plug);
 ref.pauseBtn.addEventListener("click", togglePauseInGame);
-// ref.restartBtn.addEventListener("click", plug);
 ref.rotateLeftBtn.addEventListener("click", rotateFigureLeft);
 ref.rotateRightBtn.addEventListener("click", rotateFigureRight);
 ref.leftBtn.addEventListener("click", moveFigureLeft);

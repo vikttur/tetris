@@ -1,4 +1,4 @@
-import { FIGURES } from '../constants.js';
+import { FIGURES } from '../constants/constants.js';
 import { nameFigure, initialRowOfFigure, initialColumnOfFigure } from '../helpers/index.js';
 import { firstRotationOfMatrix } from '../rotateFigure/firstRotationOfMatrix.js';
 import { nameNextFigure, generateNextFigure } from '../nextFigure/index.js';

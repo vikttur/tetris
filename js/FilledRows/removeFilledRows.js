@@ -1,4 +1,4 @@
-import { PLAYFIELD_COLUMNS } from '../constants.js';
+import { PLAYFIELD_COLUMNS } from '../constants/constants.js';
 import { elementIndex } from '../helpers/index.js';
 import { cells } from '../main.js';
 import { pointsForFilledLines } from '../calculationOfPoints/index.js';

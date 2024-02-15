@@ -4,7 +4,7 @@ import { deleteFigure, deletingDateAttributes } from '../figure/index.js';
 import { searchForFilledRows, removeFilledRows } from '../filledRows/index.js';
 import { checkingToMoveDown }  from './checkingMoveFigure.js';
 import { pointsForFigures, pointsForDrop } from '../calculationOfPoints/index.js';
-import { saveInLocalStorage } from '../localStorage.js'
+import { saveInLocalStorage } from '../localStorage/localStorage.js'
 
 function gameOver() {
 	permissionToMoveFigure(false);

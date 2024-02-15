@@ -1,4 +1,4 @@
-import { 	NEXT_FIELD_COLUMNS, NEXT_FIELD_ROWS } from '../constants.js';
+import { 	NEXT_FIELD_COLUMNS, NEXT_FIELD_ROWS } from '../constants/constants.js';
 import { createField, createFieldElements, addPlayFieldInDOM } from './createField.js';
 
 function generateFieldNextFigure() {

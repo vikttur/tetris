@@ -3,7 +3,6 @@ import { deleteFigure } from '../figure/index.js';
 import { isPermissionToRotate } from './isPermissionToRotate.js';
 import { rotateMatrix } from './rotateMatrix.js';
 
-
 function rotateFigureLeft() {
 	rotateFigure('left');
 }

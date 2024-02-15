@@ -2,7 +2,7 @@ import { FIGURES } from '/js/constants.js';
 import { nameFigure } from '../helpers/index.js';
 import { drawNextFigure } from './drawNextFigure.js';
 
-let nameNextFigure = '';
+// let nameNextFigure = '';
 
 function generateNextFigure() {
 	const nextFigure = createNextFigure(); 

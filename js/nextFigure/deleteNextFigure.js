@@ -1,4 +1,4 @@
-import { NEXT_FIELD_COLUMNS, NEXT_FIELD_ROWS } from '../constants.js';
+import { NEXT_FIELD_COLUMNS, NEXT_FIELD_ROWS } from '../constants/constants.js';
 import { indexOfNextElement } from '../helpers/elementIndex.js';
 import { cellsNext} from '../main.js';
 

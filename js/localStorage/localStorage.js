@@ -1,4 +1,4 @@
-import { currentScore } from './main.js';
+import { currentScore } from '../main.js';
 
 let key = 'hightScore';
 

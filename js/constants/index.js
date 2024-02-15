@@ -1,0 +1,19 @@
+import {
+  PLAYFIELD_COLUMNS,
+	PLAYFIELD_ROWS,
+	NEXT_FIELD_COLUMNS,
+	NEXT_FIELD_ROWS,
+  POINTS_FOR_LINES,
+	FIGURES,
+} from './constants.js';
+import { state } from './state.js';
+
+export {
+  PLAYFIELD_COLUMNS,
+	PLAYFIELD_ROWS,
+	NEXT_FIELD_COLUMNS,
+	NEXT_FIELD_ROWS,
+	POINTS_FOR_LINES,
+  FIGURES,
+  state,
+}
