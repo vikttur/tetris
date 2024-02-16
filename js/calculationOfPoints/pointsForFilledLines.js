@@ -1,5 +1,5 @@
 import { POINTS_FOR_LINES } from '../constants/constants.js';
-import { quantityLines, saveQuantityLines } from '../main.js';
+// import { quantityLines, saveQuantityLines } from '../main.js';
 import { calculationOfPoints } from './calculationOfPoints.js';
 
 function pointsForFilledLines(numberOfLines) {
@@ -9,9 +9,9 @@ function pointsForFilledLines(numberOfLines) {
 }
 
 function calculationOfLines(points) {
-  const pointsSum = quantityLines + points;
+  const pointsSum = 555 + points; //quantityLines 
   document.querySelector('.lines').innerHTML = pointsSum;
-  saveQuantityLines(pointsSum);
+  // saveQuantityLines(pointsSum);
 };
 
 export {

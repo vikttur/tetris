@@ -10,12 +10,12 @@ function createFieldElements(field, elementsQuantity) {
 	}
 }
 
-function addPlayFieldInDOM(field, parentClass) {
+function addFieldInDOM(field, parentClass) {
 	document.querySelector(parentClass).prepend(field);
 };
 
 export {
   createField,
   createFieldElements,
-  addPlayFieldInDOM,
+  addFieldInDOM,
 }

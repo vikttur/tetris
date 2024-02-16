@@ -1,4 +1,4 @@
-import { PLAYFIELD_COLUMNS } from '/js/constants.js';
+import { PLAYFIELD_COLUMNS } from '../constants/index.js';
 
 function initialRowOfFigure(matrix, size) {
 	let row = 1;

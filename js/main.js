@@ -1,14 +1,14 @@
-import { FIGURES } from '/js/constants.js';
-import { generatePlayField, generateFieldNextFigure, elementsOfPlayField } from './playField/index.js';
+import { FIGURES, state } from './constants/index.js';
+import { generatePlayField, generateFieldNextFigure, elementsOfField } from './generateField/index.js';
 import { generateFigure, drawFigure } from './figure/index.js';
 import { startLoopTimer, stopLoopTimer } from './loopTimer/index.js';
 import { moveFigureDown, hardDropOfFigure, moveFigureLeft, moveFigureRight } from './moveFigure/index.js';
 import { rotateFigureLeft, rotateFigureRight } from './rotateFigure/index.js';
 
 generatePlayField();
-const cells = elementsOfPlayField('.field li');
+const cells = elementsOfField('.field li');
 generateFieldNextFigure();
-const cellsNext = elementsOfPlayField('.field-next li');
+const cellsNext = elementsOfField('.field-next li');
  
 const figureNames = Object.keys(FIGURES);
 let figure = generateFigure();
@@ -23,19 +23,17 @@ function permissionToMoveFigure(bool) {
 	isThereMove = bool;
 }
 
-function savePoints(points) {
-	currentScore = points;
-}
+// function savePoints(points) {
+// 	currentScore = points;
+// }
 
-function saveQuantityFigure(points) {
-	quantityFigure = points;
-}
+// function saveQuantityFigure(points) {
+// 	state.quantityFigure = points;
+// }
 
-function saveQuantityLines(points) {
-	quantityLines = points;
-}
-
-quantityLines, saveQuantityLines
+// function saveQuantityLines(points) {
+// 	quantityLines = points;
+// }
 
 function togglePauseInGame() {
 	isNotPause = !isNotPause;
@@ -102,12 +100,9 @@ export {
 	cells,
 	cellsNext,
 	figure,
-	currentScore,
 	generateNewFigure,
 	permissionToMoveFigure,
-	savePoints,
-	quantityFigure,
-	saveQuantityFigure,
-	quantityLines,
-	saveQuantityLines,
+	// savePoints,
+	// saveQuantityFigure,
+	// saveQuantityLines,
 }
