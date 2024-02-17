@@ -1,9 +1,9 @@
-import { figureNames } from '../main.js';
+import { state } from '../constants/index.js';
 import { randomValue } from './randomValue.js';
 
 function nameFigure() {
-	const figureNumber = randomValue(0, figureNames.length);
-	return figureNames[figureNumber];
+	const figureNumber = randomValue(0, state.figureNames.length);
+	return state.figureNames[figureNumber];
 }
 
 export  {

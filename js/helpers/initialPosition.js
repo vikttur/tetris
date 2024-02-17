@@ -29,5 +29,5 @@ function columnAdjustment(matrix) {
 
 export {
 	initialRowOfFigure,
-	initialColumnOfFigure
+	initialColumnOfFigure,
 }

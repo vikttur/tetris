@@ -1,8 +1,9 @@
+import { state } from '../constants/index.js';
 import { elementIndex, isValidIndex } from '../helpers/index.js';
-import { cells, figure } from '../main.js';
 
 function drawFigure() {
-	const { name, matrix, size, row, column } = figure;
+	const { name, matrix, size, row, column } = state.figure;
+	const { cells } = state;
 	
 	for(let i = 0; i < size; i += 1) {
 		if(i + row < 0) continue;

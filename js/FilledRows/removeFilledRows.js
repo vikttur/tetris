@@ -1,9 +1,10 @@
-import { PLAYFIELD_COLUMNS } from '../constants/constants.js';
+import { PLAYFIELD_COLUMNS, state } from '../constants/index.js';
 import { elementIndex } from '../helpers/index.js';
-import { cells } from '../main.js';
 import { pointsForFilledLines } from '../calculationOfPoints/index.js';
 
 function removeFilledRows(array) {
+	const { cells } = state;
+
 	for(let n = 0; n < array.length; n += 1) {
 		const lastRow = array[array.length - 1];
 

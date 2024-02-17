@@ -1,9 +1,11 @@
-import { FIGURES } from '../constants/constants.js';
+import { FIGURES, state } from '../constants/index.js';
 import { nameFigure, initialRowOfFigure, initialColumnOfFigure } from '../helpers/index.js';
 import { firstRotationOfMatrix } from '../rotateFigure/firstRotationOfMatrix.js';
-import { nameNextFigure, generateNextFigure } from '../nextFigure/index.js';
+import { generateNextFigure } from '../nextFigure/index.js';
 
 function choosingFigureName() {	
+	const { nameNextFigure } = state;
+	
 	if(!nameNextFigure) return nameFigure();
 	return nameNextFigure;
 }

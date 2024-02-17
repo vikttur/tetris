@@ -1,4 +1,4 @@
-import { PLAYFIELD_COLUMNS, PLAYFIELD_ROWS, NEXT_FIELD_COLUMNS } from '/js/constants/index.js';
+import { PLAYFIELD_COLUMNS, PLAYFIELD_ROWS, NEXT_FIELD_COLUMNS } from '../constants/index.js';
 
 function elementIndex(row, column) {
 	return row * PLAYFIELD_COLUMNS + column;

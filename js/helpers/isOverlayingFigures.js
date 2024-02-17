@@ -1,8 +1,9 @@
-import { cells, figure } from '/js/main.js';
-import { elementIndex } from './elementIndex.js';
+import { state } from '../constants/index.js';
+import { elementIndex, isValidIndex } from './elementIndex.js';
 
 function isOverlayingFigures(offsetRow, offsetColumn) {
-	const { matrix, size, row, column } = figure;
+	const { size, row, column, matrix } = state.figure;
+	const { cells } = state;
 	
 	for(let i = 0; i < size; i += 1) {
 		if(i + row < 0) continue;
@@ -11,6 +12,7 @@ function isOverlayingFigures(offsetRow, offsetColumn) {
 			if(!matrix[i][j]) continue;
 			
 			const cellIndex = elementIndex(row + i + offsetRow, column + j + offsetColumn);
+			if(!isValidIndex(cellIndex)) continue;
 			if(cells[cellIndex].hasAttribute('data-figure')) continue;
 			if(cells[cellIndex].hasAttribute('class')) return true;
 		}

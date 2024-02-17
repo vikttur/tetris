@@ -1,7 +1,9 @@
+import { state } from '../constants/index.js';
 import { elementIndex, isValidIndex } from '../helpers/index.js';
 
-function deleteFigure(cells, figure) {
-	const { matrix, size, row, column } = figure;
+function deleteFigure() {
+	const { size, row, column } = state.figure;
+	const { cells } = state;
 
 	for(let i = 0; i < size; i += 1) {
 		if(i + row < 0) continue;

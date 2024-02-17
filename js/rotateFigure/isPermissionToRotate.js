@@ -1,18 +1,20 @@
-import { PLAYFIELD_COLUMNS, PLAYFIELD_ROWS } from '../constants/constants.js';
+import { PLAYFIELD_COLUMNS, PLAYFIELD_ROWS, state } from '../constants/index.js';
 import { isExitFromFieldToDown, isExitFromFieldToSide, isOverlayingFigures } from '../helpers/index.js';
 
-function isPermissionToRotate(figure) {
-	const { size, row, column } = figure;
+const { size, row, column } = state.figure;
+
+function isPermissionToRotate() {
+	// const { size, row, column } = figure;
 	
-  if(!checkingExitToDown(figure)) return; 
-  if(!checkingExitToSide(figure)) return; 
+  if(!checkingExitToDown()) return; 
+  if(!checkingExitToSide()) return; 
 	if(isOverlayingFigures(0, 0)) return;
 
 	return true;
 }
 
-function checkingExitToDown(figure) {
-  const { size, row } = figure;
+function checkingExitToDown() {
+  // const { size, row } = figure;
 
 	for(let i = 0; i < size; i += 1) {
 		if(i + row < 0) break;
@@ -25,8 +27,8 @@ function checkingExitToDown(figure) {
   return true;
 }
 
-function checkingExitToSide(figure) {
-  const { size, column } = figure;
+function checkingExitToSide() {
+  // const { size, column } = figure;
 
 	for(let j = 0; j < size; j += 1){
 		if(column + j < 0 || column + j >= PLAYFIELD_COLUMNS) {

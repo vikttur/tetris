@@ -1,6 +1,6 @@
 
+import { state } from '../constants/index.js';
 import { indexOfNextElement } from '../helpers/index.js';
-import { cellsNext} from '../main.js';
 import { deleteNextFigure } from './deleteNextFigure.js';
 
 function drawNextFigure(nextFigure) {
@@ -13,7 +13,7 @@ function drawNextFigure(nextFigure) {
 			if(!matrix[i][j]) continue;
 			
 			const cellIndex = indexOfNextElement(i, j);
-			cellsNext[cellIndex].classList.add(name);
+			state.cellsNext[cellIndex].classList.add(name);
 		}
 	}
 }

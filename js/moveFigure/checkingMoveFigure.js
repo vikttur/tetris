@@ -1,9 +1,8 @@
-import { PLAYFIELD_COLUMNS, PLAYFIELD_ROWS } from '../constants/constants.js';
+import { PLAYFIELD_COLUMNS, PLAYFIELD_ROWS, state } from '../constants/index.js';
 import { isExitFromFieldToDown, isExitFromFieldToSide, isOverlayingFigures } from '../helpers/index.js';
-import { figure } from '../main.js';
 
 function checkingToMoveDown() {
-	const { row, size } = figure;
+	const { row, size } = state.figure;
 
 	if (row + size >= PLAYFIELD_ROWS) {
 		const rowToCheck = PLAYFIELD_ROWS - row - 1;
@@ -15,7 +14,7 @@ function checkingToMoveDown() {
 }
 
 function checkingToMoveRight() {
-	const { column, size } = figure;
+	const { column, size } = state.figure;
 
 	if (column + size >= PLAYFIELD_COLUMNS) {
 		const columnToCheck = PLAYFIELD_COLUMNS - column - 1;
@@ -27,7 +26,7 @@ function checkingToMoveRight() {
 }
 
 function checkingToMoveLeft() {
-	const { column } = figure;
+	const { column } = state.figure;
 
 	if(column <= 0) {
 		const columnToCheck = 0 - column;

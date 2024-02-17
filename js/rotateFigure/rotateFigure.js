@@ -1,4 +1,4 @@
-import { cells, figure } from '../main.js';
+import { state } from '../constants/index.js';
 import { deleteFigure } from '../figure/index.js';
 import { isPermissionToRotate } from './isPermissionToRotate.js';
 import { rotateMatrix } from './rotateMatrix.js';
@@ -12,18 +12,18 @@ function rotateFigureRight() {
 }
 
 function rotateFigure(direction) {
-	const { matrix } = figure;
+	const { matrix } = state.figure;
 	const oldMatrix = matrix;
 	const newMatrix = rotateMatrix(matrix, direction);
 
-	figure.matrix = newMatrix;
+	state.figure.matrix = newMatrix;
 	
-	if(!isPermissionToRotate(figure)) {
-		figure.matrix = oldMatrix;
+	if(!isPermissionToRotate()) {
+		state.figure.matrix = oldMatrix;
 		return;
 	}	
 
-	deleteFigure(cells, figure);
+	deleteFigure();
 }
 
 export {

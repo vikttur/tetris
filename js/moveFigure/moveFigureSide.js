@@ -1,4 +1,5 @@
-import { cells, figure, permissionToMoveFigure } from '../main.js';
+import { state } from '../constants/index.js';
+import { permissionToMoveFigure } from '../helpers/index.js';
 import { deleteFigure } from '../figure/index.js';
 import { checkingToMoveRight, checkingToMoveLeft }  from './checkingMoveFigure.js';
 
@@ -13,9 +14,9 @@ function moveFigureLeft() {
 }
 
 function moveFigureSide(movingValue) {
-	deleteFigure(cells, figure);
+	deleteFigure();
 	permissionToMoveFigure(true);
-	figure.column += movingValue;
+	state.figure.column += movingValue;
 }
 
 export {

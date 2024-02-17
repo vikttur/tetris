@@ -1,7 +1,7 @@
-import { figure } from '/js/main.js';
+import { state } from '../constants/index.js';
 
 function isExitFromFieldToDown(rowToCheck) {
-	const { matrix, size } = figure;
+	const { matrix, size } = state.figure;
 
 	for(let j = 0; j < size; j += 1) {
 		if(!matrix[rowToCheck][j]) continue;
@@ -10,7 +10,7 @@ function isExitFromFieldToDown(rowToCheck) {
 }
 
 function isExitFromFieldToSide(columnToCheck) {
-	const { matrix, size } = figure;
+	const { matrix, size } = state.figure;
 
 	for(let i = 0; i < size; i += 1) {
 		if(!matrix[i][columnToCheck]) continue;

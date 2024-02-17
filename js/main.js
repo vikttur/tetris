@@ -5,23 +5,16 @@ import { startLoopTimer, stopLoopTimer } from './loopTimer/index.js';
 import { moveFigureDown, hardDropOfFigure, moveFigureLeft, moveFigureRight } from './moveFigure/index.js';
 import { rotateFigureLeft, rotateFigureRight } from './rotateFigure/index.js';
 
+let { isNotPause, isThereMove } = state;
+
 generatePlayField();
-const cells = elementsOfField('.field li');
 generateFieldNextFigure();
-const cellsNext = elementsOfField('.field-next li');
- 
-const figureNames = Object.keys(FIGURES);
-let figure = generateFigure();
+state.cells = elementsOfField('.field li');
+state.cellsNext = elementsOfField('.field-next li');
+state.figureNames = Object.keys(FIGURES);
+state.figure = generateFigure();
 
 // drawFigure();
-
-function generateNewFigure() {
-  figure = generateFigure();
-}  
-
-function permissionToMoveFigure(bool) {
-	isThereMove = bool;
-}
 
 // function savePoints(points) {
 // 	currentScore = points;
@@ -40,25 +33,25 @@ function togglePauseInGame() {
 	isNotPause ? startLoopTimer() : stopLoopTimer();
 }
 
-const ref = {
-	newBtn: document.querySelector("[data-new]"),
-	pauseBtn: document.querySelector("[data-pause]"),
-	rotateLeftBtn: document.querySelector("[data-rotate-left]"),
-	rotateRightBtn: document.querySelector("[data-rotate-right]"),	
-	leftBtn: document.querySelector("[data-left]"),
-	rightBtn: document.querySelector("[data-right]"),
-	downBtn: document.querySelector("[data-down]"),
-	hardDropBtn: document.querySelector("[data-hard-drop]"),
-};
+// const ref = {
+// 	newBtn: document.querySelector("[data-new]"),
+// 	pauseBtn: document.querySelector("[data-pause]"),
+// 	rotateLeftBtn: document.querySelector("[data-rotate-left]"),
+// 	rotateRightBtn: document.querySelector("[data-rotate-right]"),	
+// 	leftBtn: document.querySelector("[data-left]"),
+// 	rightBtn: document.querySelector("[data-right]"),
+// 	downBtn: document.querySelector("[data-down]"),
+// 	hardDropBtn: document.querySelector("[data-hard-drop]"),
+// };
 
-ref.newBtn.addEventListener("click", startLoopTimer);
-ref.pauseBtn.addEventListener("click", togglePauseInGame);
-ref.rotateLeftBtn.addEventListener("click", rotateFigureLeft);
-ref.rotateRightBtn.addEventListener("click", rotateFigureRight);
-ref.leftBtn.addEventListener("click", moveFigureLeft);
-ref.rightBtn.addEventListener("click", moveFigureRight);
-ref.downBtn.addEventListener("click", moveFigureDown);
-ref.hardDropBtn.addEventListener("click", hardDropOfFigure);
+// ref.newBtn.addEventListener("click", startLoopTimer);
+// ref.pauseBtn.addEventListener("click", togglePauseInGame);
+// ref.rotateLeftBtn.addEventListener("click", rotateFigureLeft);
+// ref.rotateRightBtn.addEventListener("click", rotateFigureRight);
+// ref.leftBtn.addEventListener("click", moveFigureLeft);
+// ref.rightBtn.addEventListener("click", moveFigureRight);
+// ref.downBtn.addEventListener("click", moveFigureDown);
+// ref.hardDropBtn.addEventListener("click", hardDropOfFigure);
 
 document.addEventListener('keydown', onPressKay);
 
@@ -96,12 +89,10 @@ function onPressKay(e) {
 }
 
 export {
-	figureNames,
-	cells,
-	cellsNext,
-	figure,
-	generateNewFigure,
-	permissionToMoveFigure,
+	// figureNames,
+	// cells,
+	// cellsNext,
+	// figure,
 	// savePoints,
 	// saveQuantityFigure,
 	// saveQuantityLines,

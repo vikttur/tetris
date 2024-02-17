@@ -1,9 +1,9 @@
-import { PLAYFIELD_COLUMNS } from '../constants/constants.js';
+import { PLAYFIELD_COLUMNS, state } from '../constants/index.js';
 import { elementIndex, isValidIndex } from '../helpers/index.js';
-import { cells, figure } from '../main.js';
 
 function searchForFilledRows() {
-	const { size, row } = figure;
+	const { size, row } = state.figure;
+	const { cells } = state;
 	const arrayOfFilledRows = [];
 
 	for(let i = row; i < row + size; i += 1) {

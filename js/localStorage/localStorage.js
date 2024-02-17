@@ -1,5 +1,4 @@
-// import { currentScore } from '../main.js';
-let currentScore = 0;
+import { state } from '../constants/index.js';
 
 let key = 'hightScore';
 
@@ -13,7 +12,7 @@ function startSetLocalStorage( key, value) {
 }
 
 function displayOfhightScore() {
-  document.querySelector('.hight-score').innerHTML = localStorage.getItem (key);
+  document.querySelector('.hight-score').innerHTML = localStorage.getItem(key);
 }
 
 function setLocalStorage( key, value) {
@@ -25,9 +24,8 @@ function getLocalStorage(key) {
 }
 
 function saveInLocalStorage() {
-  console.log(currentScore);
+  const { currentScore } = state;
   const maxScore = getLocalStorage(key);
-  console.log(maxScore);
   if(maxScore > currentScore) return;
   setLocalStorage(key, currentScore);
 }

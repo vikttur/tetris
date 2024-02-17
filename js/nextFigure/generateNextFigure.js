@@ -1,8 +1,6 @@
-import { FIGURES } from '/js/constants/index.js';
+import { FIGURES, state } from '../constants/index.js';
 import { nameFigure } from '../helpers/index.js';
 import { drawNextFigure } from './drawNextFigure.js';
-
-let nameNextFigure = '';
 
 function generateNextFigure() {
 	const nextFigure = createNextFigure(); 
@@ -10,18 +8,17 @@ function generateNextFigure() {
 }
 
 function createNextFigure() {
-	nameNextFigure = nameFigure();
-	const matrix = FIGURES[nameNextFigure];
+	state.nameNextFigure = nameFigure();
+	const matrix = FIGURES[state.nameNextFigure];
 	const size = matrix.length;
 
 	return {
-		name: nameNextFigure,
+		name: state.nameNextFigure,
 		matrix,
 		size,
 	}
 }
 
 export {
-	nameNextFigure,
 	generateNextFigure,
 }

@@ -1,16 +1,16 @@
-import { isOverlayingFigures } from '../helpers/index.js';
-import { cells, figure, permissionToMoveFigure, generateNewFigure  } from '../main.js';
-import { deleteFigure, deletingDateAttributes } from '../figure/index.js';
+import { state } from '../constants/index.js';
+import { isOverlayingFigures, permissionToMoveFigure } from '../helpers/index.js';
+import { generateFigure, deleteFigure, deletingDateAttributes } from '../figure/index.js';
 import { searchForFilledRows, removeFilledRows } from '../filledRows/index.js';
-import { checkingToMoveDown }  from './checkingMoveFigure.js';
 import { pointsForFigures, pointsForDrop } from '../calculationOfPoints/index.js';
 import { saveInLocalStorage } from '../localStorage/localStorage.js'
+import { checkingToMoveDown }  from './checkingMoveFigure.js';
 
 function gameOver() {
 	permissionToMoveFigure(false);
   console.log('GAME OVER!!!');
 	saveInLocalStorage();
-};
+}; 
 
 function moveFigureDown(isCalc) {
 	if(!checkingToMoveDown()) {
@@ -35,14 +35,14 @@ function FindAndDeleteFilledRows() {
 }
 
 function newFigure() {
-	deletingDateAttributes(cells, figure);
-	generateNewFigure();
+	deletingDateAttributes();
+	state.figure = generateFigure();
 }
 
 function moveFigure(movingValue) {
-	deleteFigure(cells, figure);
+	deleteFigure();
 	permissionToMoveFigure(true);
-	figure.row += movingValue;
+	state.figure.row += movingValue;
 }
 
 export {
