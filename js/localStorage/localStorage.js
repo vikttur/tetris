@@ -26,7 +26,9 @@ function getLocalStorage(key) {
 function saveInLocalStorage() {
   const { currentScore } = state;
   const maxScore = getLocalStorage(key);
-  if(maxScore > currentScore) return;
+  
+  console.log(currentScore);
+  if(maxScore >= currentScore) return;
   setLocalStorage(key, currentScore);
 }
  
