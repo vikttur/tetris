@@ -1,5 +1,5 @@
+import { state } from '../constants/index.js';
 import { calculationOfPoints } from './calculationOfPoints.js';
-// import { quantityFigure, saveQuantityFigure } from '../main.js'; 
 
 function pointsForFigures() {
   calculationOfPoints(1);
@@ -7,10 +7,14 @@ function pointsForFigures() {
 }
 
 function calculationOfFigures(points) {
-  const pointsSum = 555 + points; //quantityFigure
+  const pointsSum = state.quantityFigure + points;
   document.querySelector('.figures').innerHTML = pointsSum;
-  // saveQuantityFigure(pointsSum);
+  saveQuantityFigure(pointsSum);
 };
+
+function saveQuantityFigure(points) {
+	state.quantityFigure = points;
+}
 
 export {
   pointsForFigures,

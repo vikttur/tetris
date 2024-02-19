@@ -14,25 +14,6 @@ state.cellsNext = elementsOfField('.field-next li');
 state.figureNames = Object.keys(FIGURES);
 state.figure = generateFigure();
 
-// drawFigure();
-
-// function savePoints(points) {
-// 	currentScore = points;
-// }
-
-// function saveQuantityFigure(points) {
-// 	state.quantityFigure = points;
-// }
-
-// function saveQuantityLines(points) {
-// 	quantityLines = points;
-// }
-
-function togglePauseInGame() {
-	isNotPause = !isNotPause;
-	isNotPause ? startLoopTimer() : stopLoopTimer();
-}
-
 // const ref = {
 // 	newBtn: document.querySelector("[data-new]"),
 // 	pauseBtn: document.querySelector("[data-pause]"),
@@ -52,6 +33,11 @@ function togglePauseInGame() {
 // ref.rightBtn.addEventListener("click", moveFigureRight);
 // ref.downBtn.addEventListener("click", moveFigureDown);
 // ref.hardDropBtn.addEventListener("click", hardDropOfFigure);
+
+function togglePauseInGame() {
+	isNotPause = !isNotPause;
+	isNotPause ? startLoopTimer() : stopLoopTimer();
+}
 
 document.addEventListener('keydown', onPressKay);
 
@@ -86,14 +72,4 @@ function onPressKay(e) {
 	}
 
 	if (isThereMove) drawFigure(); 
-}
-
-export {
-	// figureNames,
-	// cells,
-	// cellsNext,
-	// figure,
-	// savePoints,
-	// saveQuantityFigure,
-	// saveQuantityLines,
 }
