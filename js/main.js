@@ -1,4 +1,4 @@
-import { FIGURES, state } from './constants/index.js';
+import { FIGURES, CLASS_BTN, state } from './constants/index.js';
 import { generatePlayField, generateFieldNextFigure, elementsOfField } from './generateField/index.js';
 import { generateFigure, drawFigure } from './figure/index.js';
 import { startLoopTimer, stopLoopTimer } from './loopTimer/index.js';
@@ -14,32 +14,47 @@ state.cellsNext = elementsOfField('.field-next li');
 state.figureNames = Object.keys(FIGURES);
 state.figure = generateFigure();
 
-// const ref = {
-// 	newBtn: document.querySelector("[data-new]"),
-// 	pauseBtn: document.querySelector("[data-pause]"),
-// 	rotateLeftBtn: document.querySelector("[data-rotate-left]"),
-// 	rotateRightBtn: document.querySelector("[data-rotate-right]"),	
-// 	leftBtn: document.querySelector("[data-left]"),
-// 	rightBtn: document.querySelector("[data-right]"),
-// 	downBtn: document.querySelector("[data-down]"),
-// 	hardDropBtn: document.querySelector("[data-hard-drop]"),
-// };
+const gameControl = document.querySelector(".game-control");
+gameControl.addEventListener("click", selectBtn);
+document.addEventListener('keydown', onPressKay);
 
-// ref.newBtn.addEventListener("click", startLoopTimer);
-// ref.pauseBtn.addEventListener("click", togglePauseInGame);
-// ref.rotateLeftBtn.addEventListener("click", rotateFigureLeft);
-// ref.rotateRightBtn.addEventListener("click", rotateFigureRight);
-// ref.leftBtn.addEventListener("click", moveFigureLeft);
-// ref.rightBtn.addEventListener("click", moveFigureRight);
-// ref.downBtn.addEventListener("click", moveFigureDown);
-// ref.hardDropBtn.addEventListener("click", hardDropOfFigure);
+function selectBtn (e) {
+  if (e.target.nodeName !== "BUTTON") return;
+	if(e.target.classList[1] === 'pause')	togglePauseInGame();
+	if(!isNotPause) return;
+
+	switch(e.target.classList[1]) {
+		case CLASS_BTN[0]:
+			startLoopTimer();
+			break;
+		case CLASS_BTN[1]:
+			togglePauseInGame();
+			break;
+		case CLASS_BTN[2]:
+			rotateFigureLeft();
+			break;
+		case CLASS_BTN[3]:
+			rotateFigureRight();
+			break;
+		case CLASS_BTN[4]:
+			moveFigureLeft();
+			break;
+		case CLASS_BTN[5]:
+			moveFigureRight();
+			break;
+		case CLASS_BTN[6]:
+			hardDropOfFigure();
+			break;
+		case CLASS_BTN[7]:
+			moveFigureDown(true);
+			break;
+	}
+}
 
 function togglePauseInGame() {
 	isNotPause = !isNotPause;
 	isNotPause ? startLoopTimer() : stopLoopTimer();
 }
-
-document.addEventListener('keydown', onPressKay);
 
 function onPressKay(e) {
 	const eKey = e.key.toLowerCase();

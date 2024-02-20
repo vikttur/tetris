@@ -48,6 +48,8 @@ const FIGURES = {
 	],
 };
 
+const CLASS_BTN = ['new-game', 'pause"',  'rotate-left', 'rotate-right', 'left', 'right', 'hard-drop', 'down'];
+
 export {
 	PLAYFIELD_COLUMNS,
 	PLAYFIELD_ROWS,
@@ -55,4 +57,5 @@ export {
 	NEXT_FIELD_ROWS,
 	POINTS_FOR_LINES,
 	FIGURES,
+	CLASS_BTN,
 }

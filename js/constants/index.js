@@ -4,6 +4,7 @@ import {
 	NEXT_FIELD_COLUMNS,
 	NEXT_FIELD_ROWS,
   POINTS_FOR_LINES,
+	CLASS_BTN,
 	FIGURES,
 } from './constants.js';
 import { state } from './state.js';
@@ -15,5 +16,6 @@ export {
 	NEXT_FIELD_ROWS,
 	POINTS_FOR_LINES,
   FIGURES,
+	CLASS_BTN,
   state,
 }
