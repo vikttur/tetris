@@ -4,6 +4,7 @@ const state = {
 	cells: [],
 	cellsNext: [],
 	nameNextFigure: '',
+	isGame: false,
 	isThereMove: true,
 	isNotPause: true,
   interval: 700,
