@@ -2,8 +2,18 @@ import { state } from '../constants/index.js';
 import { generateFigure } from '../figure/index.js';
 
 function initialSetting() {
+  clearFied();
   initialState();
   counterReset();
+}
+
+function clearFied() {
+  const { cells } = state;
+
+  for(let i = 0; i < cells.length; i += 1) {
+    cells[i].removeAttribute('class');
+	  cells[i].removeAttribute('data-figure');
+  }
 }
 
 function initialState() {
