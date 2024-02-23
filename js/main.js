@@ -1,7 +1,7 @@
 import { FIGURES, CLASS_BTN, state } from './constants/index.js';
 import { generatePlayField, generateFieldNextFigure, elementsOfField } from './generateField/index.js';
 import { drawFigure } from './figure/index.js';
-import { newGame, startLoopTimer, stopLoopTimer, stopGame } from './sartStop/index.js';
+import { newGame, togglePauseInGame, stopGame } from './sartStop/index.js';
 import { moveFigureDown, hardDropOfFigure, moveFigureLeft, moveFigureRight } from './moveFigure/index.js';
 import { rotateFigureLeft, rotateFigureRight } from './rotateFigure/index.js';
 
@@ -49,12 +49,6 @@ function selectBtn (e) {
 			moveFigureDown(true);
 			break;
 	}
-}
-
-function togglePauseInGame() {
-	if(!state.isGame) return;
-	isNotPause = !isNotPause;
-	isNotPause ? startLoopTimer() : stopLoopTimer();
 }
 
 function onPressKay(e) {
