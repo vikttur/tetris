@@ -3,14 +3,8 @@ import { isOverlayingFigures, permissionToMoveFigure } from '../helpers/index.js
 import { generateFigure, deleteFigure, deletingDateAttributes } from '../figure/index.js';
 import { searchForFilledRows, removeFilledRows } from '../filledRows/index.js';
 import { pointsForFigures, pointsForDrop } from '../calculationOfPoints/index.js';
-import { saveInLocalStorage } from '../localStorage/localStorage.js'
 import { checkingToMoveDown }  from './checkingMoveFigure.js';
-
-function gameOver() {
-	permissionToMoveFigure(false);
-  console.log('GAME OVER!!!');
-	saveInLocalStorage();
-}; 
+import { gameOver }  from '../gameOver/index.js';
 
 function moveFigureDown(isCalc) {
 	if(!checkingToMoveDown()) {

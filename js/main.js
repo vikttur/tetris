@@ -18,14 +18,14 @@ gameControl.addEventListener("click", selectBtn);
 document.addEventListener('keydown', onPressKay);
 
 function selectBtn (e) {
-  if (e.target.nodeName !== "BUTTON") return;
+  if(e.target.nodeName !== "BUTTON") return;
 	if(e.target.classList[1] === 'stop')	stopGame();
 	if(e.target.classList[1] === 'pause')	togglePauseInGame();
 	if(!isNotPause) return;
 
 	switch(e.target.classList[1]) {
 		case CLASS_BTN[0]:
-			state.isGame ? stopGame(): newGame();
+			!state.isGame && newGame();
 			break;
 		case CLASS_BTN[1]:
 			togglePauseInGame();
@@ -59,8 +59,11 @@ function onPressKay(e) {
 	
 	switch(eKey) {
 		case 's':
-			state.isGame ? stopGame(): newGame();
+			!state.isGame && newGame();
 			break;
+		case 'f':
+			state.isGame && stopGame();
+				break;
 		case 'arrowdown':
 			moveFigureDown(true);
 			break;
