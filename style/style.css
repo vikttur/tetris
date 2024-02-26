@@ -69,9 +69,6 @@ ul {
 
 	padding: 10px;
 	gap: 20px;
-
-	/* width: 500px; */
-	/* height: 240px; */
 	border: 1px solid red;
 }
 
@@ -84,39 +81,18 @@ ul {
 	gap: 4px;
 
 	padding: 10px;
-
 }
-
-/* .btn-general{
-	display: inline-block;
-	min-width: 120px;
-	height: 40px;
-	padding: 8px;
-
-	border-radius: 8px;
-	border: none;
-	background-color: rgb(109, 154, 213);
-	
-	font-weight: bold;
-	font-size: 16px;
-	line-height: 1.88;
-	letter-spacing: 0.06em;
-	color: #000000;
-
-	cursor: pointer;
-} */
 
 .btn	{
 	height: 60px;
 	border-radius: 25%;
-	/* border: none; */
-
 	cursor: pointer;
 }
 
 .new-game {
 	grid-column: 2 / 4;
 	grid-row: 1 / 2;
+	z-index: 1001;
 }
 
 .stop {
@@ -169,15 +145,10 @@ ul {
 	gap: 10px;
 
 	width: 150px;
-	/* display: grid; */
-	/* grid-template-columns: repeat(2, 100px);
-	grid-template-rows: repeat(3, 70px) ; */
-	/* transform: rotate(45deg);
-} */ 
 }
 /* ========================= */
 .backdrop {
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
@@ -198,9 +169,11 @@ ul {
 	display: flex;
 	flex-direction: column;
 	position: absolute;
-	top: 35%;
-	left: 45%;
+	width: 100%;
+  height: 100%;
+	left: 0%;
 	align-items: center;
+	justify-content: center;
 	z-index: 999;
 	border: 1px solid red;
 }
@@ -212,24 +185,6 @@ ul {
 	color:rgb(236, 107, 52);
 	text-transform: uppercase;
 }
-
-.game-over__btn {
-	display: inline-block;
-	border: 1px solid transparent;
-	border-radius: 4px;
-
-	font-size: 16px;
-	background-color: #2779eb;
-	
-	font-weight: 700;
-	line-height: 1.88;
-	letter-spacing: 0.06em;
-	color: #dfdfdf;
-	
-	border: none;
-	cursor: pointer;
-}
-
 
 /* ========================= */
 

@@ -1,5 +1,6 @@
 const state = {
 	figure: {},
+	backdrop: {},
 	figureNames: [],
 	cells: [],
 	cellsNext: [],

@@ -3,8 +3,8 @@ import { initialSetting } from './initialSetting.js';
 import { startLoopTimer } from './loopTimer.js';
 
 function newGame() {
+  state.backdrop.classList.add('is-hidden');
   if(state.isGame) return;
-  // location.reload();
   initialSetting();
   startLoopTimer();
 }

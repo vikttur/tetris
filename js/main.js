@@ -11,6 +11,7 @@ generatePlayField();
 generateFieldNextFigure();
 state.cells = elementsOfField('.field li');
 state.cellsNext = elementsOfField('.field-next li');
+state.backdrop = document.querySelector('.backdrop');
 state.figureNames = Object.keys(FIGURES);
 
 const gameControl = document.querySelector(".game-control");
@@ -19,7 +20,12 @@ document.addEventListener('keydown', onPressKay);
 
 function selectBtn (e) {
   if(e.target.nodeName !== "BUTTON") return;
-	if(e.target.classList[1] === 'stop')	stopGame();
+	
+	if(e.target.classList[1] === 'stop')	{
+		stopGame();
+		return;
+	}
+
 	if(e.target.classList[1] === 'pause')	togglePauseInGame();
 	if(!isNotPause) return;
 
