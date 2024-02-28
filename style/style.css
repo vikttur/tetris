@@ -59,9 +59,12 @@ ul {
 .control-panel {
 	display: flex;
 	flex-direction: column;
+	justify-content: center;
+	position: relative;
+	padding-top: 40px;
 }
 
-.general-control {
+/* .general-control {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -70,7 +73,7 @@ ul {
 	padding: 10px;
 	gap: 20px;
 	border: 1px solid red;
-}
+} */
 
 /* ========================= */
 .game-control{
@@ -203,8 +206,8 @@ ul {
 	justify-content: center;
 
 	position: absolute;
-	top: -34px;
-	left: 40px;
+	top: 10px;
+	left: 35%;
 
 	width: 70px;
 }

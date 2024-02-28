@@ -8,18 +8,18 @@ import { createField, createFieldElements, addFieldInDOM } from './createField.j
 
 function generatePlayField() {
 	const elementsQuantity = PLAYFIELD_COLUMNS * PLAYFIELD_ROWS;
-	generateField('field', elementsQuantity);
+	generateField('.playfield','field', elementsQuantity);
 }
 
 function generateFieldNextFigure() {
 	const elementsQuantity = NEXT_FIELD_COLUMNS * NEXT_FIELD_ROWS;
-	generateField('field-next', elementsQuantity);
+	generateField('.control-panel','field-next', elementsQuantity);
 }
 
-function generateField(classOfField, elementsQuantity) {
+function generateField(classParent, classOfField, elementsQuantity) {
 	const field = createField(classOfField);
 	createFieldElements(field, elementsQuantity);
-	addFieldInDOM(field, '.playfield');
+	addFieldInDOM(field, classParent);
 }
 
 export {
