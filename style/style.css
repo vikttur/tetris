@@ -30,14 +30,20 @@ ul {
 	gap: 20px;
 	font-weight: bold;
 	font-size: 30px;
-	border: 1px solid red;
+	border: 2px solid rgb(136, 132, 132);
+	border-radius: 8px;
+	background-color: rgb(219, 205, 205);
 }
 
 .calculation {
 	display: flex;
 	align-items: center;
-	border: 8px solid rgb(106, 220, 233);
-	border-radius: 12px;
+	padding: 4px;
+	/* border: 8px solid rgb(106, 220, 233);
+	border-radius: 12px; */
+	border: 2px solid rgb(136, 132, 132);
+	border-radius: 8px;
+	background-color: rgb(240, 240, 240);
 }
 
 .name-score {
@@ -53,6 +59,8 @@ ul {
 
 .playfield {
 	position:relative;
+	border-radius: 8px;
+	border: 2px solid rgb(136, 132, 132);
 }
 
 
@@ -84,6 +92,11 @@ ul {
 	gap: 4px;
 
 	padding: 10px;
+
+	border: 2px solid rgb(136, 132, 132);
+	border-radius: 8px;
+	background-color: rgb(219, 205, 205);
+	margin-bottom: auto;
 }
 
 .btn	{
@@ -206,10 +219,14 @@ ul {
 	justify-content: center;
 
 	position: absolute;
-	top: 10px;
+	top: 6px;
 	left: 35%;
-
 	width: 70px;
+	padding: 4px;
+
+	border: 2px solid rgb(136, 132, 132);
+	border-radius: 8px;
+	background-color: rgb(219, 205, 205);
 }
 
 .field-next li {
@@ -222,7 +239,7 @@ ul {
 .field li {
 	width: 26px;
 	height: 26px;
-	background-color: rgba(98, 98, 155, 0.611);
+	background-color: rgb(219, 205, 205);
 	border-radius: 2px;
 	/* box-shadow: inset 4px 4px 8px rgb(116, 43, 207, 0.2),
 							inset -4px -4px 8px rgb(116, 43, 207, 0.2); */
