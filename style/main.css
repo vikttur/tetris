@@ -1,0 +1,8 @@
+@import './reset.css';
+@import './base.css';
+@import './result.css';
+@import './playfield.css'; 
+@import './field-game.css'; 
+@import './control-panel.css'; 
+@import './field-next.css'; 
+@import './backdrop.css'; 

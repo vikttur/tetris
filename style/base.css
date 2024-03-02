@@ -1,0 +1,37 @@
+:root {
+	--color-accent: #2196f3;
+	--color-accent: #2196f3;
+	--color-bgr: #f0eaea;
+	--color-bgr-body: #f5f5f5;
+	--color-border: #7c7979;
+	--color-btn: #f5f5f5;
+	--color-stop: #e94f0d;
+
+	--border-style: 2px solid var(--color-border);
+}
+
+body{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	position: static;
+	height: 100vh;
+	user-select: none;
+
+	background-color: var(--color-bgr-body);
+}
+
+.tetris {
+	display: flex;
+}
+
+/* .main-control {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	gap: 10px;
+
+	width: 150px;
+} */

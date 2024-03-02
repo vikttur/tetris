@@ -1,0 +1,21 @@
+.field-next {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+
+	position: absolute;
+	top: 6px;
+	left: 35%;
+	width: 70px;
+	padding: 4px;
+
+	border: var(--border-style);
+	border-radius: 8px;
+	background-color: var(--color-bgr);
+}
+
+.field-next li {
+	width: 16px;
+	height: 16px;
+	border-radius: 1px;
+}
