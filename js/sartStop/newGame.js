@@ -7,6 +7,7 @@ function newGame() {
   if(state.isGame) return;
   initialSetting();
   startLoopTimer();
+  document.querySelector('.new-game').classList.remove('active');
 }
 
 export {

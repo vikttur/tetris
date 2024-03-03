@@ -1,5 +1,5 @@
 .playfield {
 	position:relative;
-	border-radius: 8px;
 	border: var(--border-style);
+	border-radius: 10px;
 }

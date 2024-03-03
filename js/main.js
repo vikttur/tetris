@@ -5,8 +5,6 @@ import { newGame, togglePauseInGame, stopGame } from './sartStop/index.js';
 import { moveFigureDown, hardDropOfFigure, moveFigureLeft, moveFigureRight } from './moveFigure/index.js';
 import { rotateFigureLeft, rotateFigureRight } from './rotateFigure/index.js';
 
-let { isNotPause, isThereMove } = state;
-
 generatePlayField();
 generateFieldNextFigure();
 state.cells = elementsOfField('.field li');
@@ -27,7 +25,7 @@ function selectBtn (e) {
 	}
 
 	if(e.target.classList[1] === 'pause')	togglePauseInGame();
-	if(!isNotPause) return;
+	if(!state.isNotPause) return;
 
 	switch(e.target.classList[1]) {
 		case CLASS_BTN[0]:
@@ -61,12 +59,11 @@ function onPressKay(e) {
 	const eKey = e.key.toLowerCase();
 
 	if(eKey === 'escape')	togglePauseInGame();
-	if(!isNotPause) return;
+	if(!state.isNotPause) return;
+	if(eKey === 's' & !state.isGame) newGame();
+	if(!state.isGame) return;
 	
 	switch(eKey) {
-		case 's':
-			!state.isGame && newGame();
-			break;
 		case 'f':
 			state.isGame && stopGame();
 				break;
@@ -90,5 +87,5 @@ function onPressKay(e) {
 			break;
 	}
 
-	if (isThereMove) drawFigure(); 
+	if (state.isThereMove) drawFigure(); 
 }

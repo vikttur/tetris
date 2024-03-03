@@ -5,70 +5,53 @@
 	grid-template-rows: repeat(20, auto) ;
 	background-color: var(--color-bgr);
 	padding: 2px;
-	border-radius: 3px;
+	border-radius: 10px;
 }
 
 .field li {
 	width: 26px;
 	height: 26px;
 	border-radius: 3px;
-	/* box-shadow: inset 4px 4px 8px rgb(116, 43, 207, 0.2),
-							inset -4px -4px 8px rgb(116, 43, 207, 0.2); */
 }
 
 .field .O,
 .field-next .O {
 	background-color: rgb(255, 255, 0);
 	box-shadow: inset -8px 8px 15px rgba(160, 160, 160, 0.5); 
-	/* box-shadow: inset -4px -4px 0px rgba(210, 210, 0, 0.2),
-							inset 4px 4px 0px rgba(210, 210, 0, 0.2);		 */
 }
 
 .field .T,
 .field-next .T {
 	background-color: rgb(195, 0, 255);
 	box-shadow: inset -8px 8px 15px rgba(255, 255, 255, 0.5); 
-	/* box-shadow: inset -4px -4px 0px rgba(155, 0, 210, 0.2),
-							inset 4px 4px 0px rgba(155, 0, 210, 0.2);	 */
 }
 
 .field .L,
 .field-next .L {
 	background-color: rgb(206, 159, 29);
 	box-shadow: inset -8px 8px 15px rgba(255, 255, 255, 0.5); 
-	/* box-shadow: inset -4px -4px 0px rgba(166, 119, 0, 0.2),
-							inset 4px 4px 0px rgba(166, 119, 0, 0.2);	 */
 }
 
 .field .Lr,
 .field-next .Lr {
 	background-color: rgb(0, 0, 255);
 	box-shadow: inset -8px 8px 15px rgba(255, 255, 255, 0.5); 
-	/* box-shadow: inset -4px -4px 0px rgba(0, 0, 210, 0.2),
-							inset 4px 4px 0px rgba(0, 0, 210, 0.2);		 */
 }
 
 .field .S,
 .field-next .S {
 	background-color: rgb(0, 255, 0);
 	box-shadow: inset -8px 8px 15px rgba(160, 160, 160, 0.5); 
-           /* inset 10px 10px 15px rgba(70, 70, 70, 0.12); */
-	/* box-shadow: inset -4px -4px 0px rgba(0, 210, 0, 0.2),
-							inset 4px 4px 0px rgba(0, 210, 0, 0.2);		 */
 }
 
 .field .Sr,
 .field-next .Sr {
 	background-color: rgb(255, 0, 0);
 	box-shadow: inset -8px 8px 15px rgba(255, 255, 255, 0.5); 
-	/* box-shadow: inset -4px -4px 0px rgba(210, 0, 0, 0.2),
-							inset 4px 4px 0px rgba(210, 0, 0, 0.2); */
 }
 
 .field .I,
 .field-next .I {
 	background-color: rgb(0, 225, 255);
 	box-shadow: inset -8px 8px 15px rgba(160, 160, 160, 0.5);  
-	/* box-shadow: inset -4px -4px 0px rgba(0, 210, 210, 0.2),
-							inset 4px 4px 0px rgba(0, 210, 210, 0.2);		 */
 }

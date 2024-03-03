@@ -7,6 +7,7 @@ function stopGame() {
   state.isGame = false;
   stopLoopTimer();
   gameOver();
+  document.querySelector('.new-game').classList.add('active');
 }
 
 export {

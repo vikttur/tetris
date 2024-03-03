@@ -11,7 +11,7 @@
 
 	border: var(--border-style);
 	border-radius: 8px;
-	background-color: var(--color-bgr);
+	background-color: var(--color-bgr-body);
 }
 
 .field-next li {

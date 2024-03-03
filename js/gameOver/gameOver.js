@@ -6,6 +6,7 @@ import { saveInLocalStorage } from '../localStorage/localStorage.js';
 function gameOver() {
 	state.backdrop.classList.remove('is-hidden');	
 	permissionToMoveFigure(false);
+	document.querySelector('.stop-game').innerHTML = 'game over';
 	stopGame();
 	saveInLocalStorage();
 }

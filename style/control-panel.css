@@ -27,10 +27,13 @@
 	cursor: pointer;
 }
 
+.active{
+	z-index: 1001;
+}
+
 .new-game {
 	grid-column: 2 / 4;
 	grid-row: 1 / 2;
-	z-index: 1001;
 }
 
 .stop {
